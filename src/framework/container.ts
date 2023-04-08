@@ -11,17 +11,21 @@ import { I_AUTH_REPOSITORY } from "../modules/user/domain/auth-repository.interf
 import { InMemoryAuthRepository } from "../modules/user/infra/inmemory.auth-repository";
 import { RegisterUseCase } from "../modules/user/domain/register.usecase";
 import { LoginUseCase } from "../modules/user/domain/login.usecase";
+import { UserPresenter } from "../modules/user/domain/presenter/user.presenter";
+import { AuthenticatedUserPresenter } from "../modules/user/domain/presenter/authenticated-user.presenter";
 
 const container = new Container();
-container.bind(I_DATE_PROVIDER).to(SystemDateProvider);
-container.bind(I_ID_PROVIDER).to(SystemIDProvider);
-container.bind(I_RANDOM_PROVIDER).to(SystemRandomProvider);
-container.bind(I_AUTH_REPOSITORY).to(InMemoryAuthRepository);
+container.bind(I_DATE_PROVIDER).to(SystemDateProvider).inSingletonScope();
+container.bind(I_ID_PROVIDER).to(SystemIDProvider).inSingletonScope();
+container.bind(I_RANDOM_PROVIDER).to(SystemRandomProvider).inSingletonScope();
+container.bind(I_AUTH_REPOSITORY).to(InMemoryAuthRepository).inSingletonScope();
 
-container.bind(CoreService).toSelf();
+container.bind(CoreService).toSelf().inSingletonScope();
 
-container.bind(RegisterUseCase).toSelf();
-container.bind(LoginUseCase).toSelf();
+container.bind(RegisterUseCase).toSelf().inSingletonScope();
+container.bind(LoginUseCase).toSelf().inSingletonScope();
+container.bind(UserPresenter).toSelf().inSingletonScope();
+container.bind(AuthenticatedUserPresenter).toSelf().inSingletonScope();
 
 export const getContainer = () => {
   return container;

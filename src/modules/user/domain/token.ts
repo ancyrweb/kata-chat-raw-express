@@ -9,4 +9,24 @@ type TokenData = {
   expired: boolean;
 };
 
-export class Token extends AbstractEntity<TokenData> {}
+export class Token extends AbstractEntity<TokenData> {
+  get userId() {
+    return this.state.userId;
+  }
+
+  get value() {
+    return this.state.value;
+  }
+
+  get createdAt() {
+    return this.state.createdAt;
+  }
+
+  get expiresAt() {
+    return this.state.expiresAt;
+  }
+
+  get expired() {
+    return this.state.expired;
+  }
+}

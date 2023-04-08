@@ -1,9 +1,8 @@
-import { injectable } from "inversify";
 import { CoreService } from "./core.service";
-import { controller, httpGet } from "inversify-express-utils";
+import { controller, httpGet, interfaces } from "inversify-express-utils";
 
 @controller("/")
-export class CoreController {
+export class CoreController implements interfaces.Controller {
   constructor(private readonly coreService: CoreService) {}
 
   @httpGet("/")

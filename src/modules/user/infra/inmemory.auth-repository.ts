@@ -1,16 +1,24 @@
+import { injectable } from "inversify";
 import {
   IAuthRepository,
   InvalidCredentialsException,
+  UsernameAlreadyTakenException,
 } from "../domain/auth-repository.interface";
 import { Token } from "../domain/token";
 import { UnregisteredUser } from "../domain/unregistered-user";
 import { User } from "../domain/user";
 
+@injectable()
 export class InMemoryAuthRepository implements IAuthRepository {
   private users: User[] = [];
   private tokens: Token[] = [];
 
   async register(user: UnregisteredUser): Promise<User> {
+    const existingUser = this.users.find((u) => u.username === user.username);
+    if (existingUser) {
+      throw new UsernameAlreadyTakenException();
+    }
+
     const newUser = new User({
       id: user.id,
       username: user.username,
@@ -20,7 +28,6 @@ export class InMemoryAuthRepository implements IAuthRepository {
     });
 
     this.users.push(newUser);
-
     return newUser;
   }
 

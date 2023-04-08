@@ -1,5 +1,4 @@
 import { AppException } from "../../../shared/errors";
-import { AuthenticatedUser } from "./authenticated-user";
 import { Token } from "./token";
 import { UnregisteredUser } from "./unregistered-user";
 import { User } from "./user";
@@ -11,6 +10,12 @@ export interface IAuthRepository {
   login(username: string, password: string): Promise<User>;
 
   createToken(token: Token): Promise<void>;
+}
+
+export class UsernameAlreadyTakenException extends AppException {
+  constructor() {
+    super("Username already taken", "USERNAME_ALREADY_TAKEN");
+  }
 }
 
 export class InvalidCredentialsException extends AppException {

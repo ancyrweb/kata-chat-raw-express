@@ -1,6 +1,8 @@
+import { injectable } from "inversify";
 import { ErrorUtils } from "./errors";
 import { Result, ResultUtils } from "./result";
 
+@injectable()
 export abstract class AbstractUseCase<TInput, TOutput> {
   abstract handle(data: TInput): Promise<Result<TOutput>>;
 

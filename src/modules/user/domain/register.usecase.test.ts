@@ -1,10 +1,14 @@
-import { ResultUtils } from "../../../shared/result";
+import { mock } from "jest-mock-extended";
+
 import { IDateProvider } from "../../core/domain/ports/date-provider.interface";
 import { IIDProvider } from "../../core/domain/ports/id-provider.interface";
-import { IAuthRepository } from "./auth-repository.interface";
+import {
+  IAuthRepository,
+  UsernameAlreadyTakenException,
+} from "./auth-repository.interface";
 import { RegisterUseCase } from "./register.usecase";
-import { mock } from "jest-mock-extended";
 import { User } from "./user";
+import { ResultUtils } from "../../../shared/result";
 
 describe("RegisterUseCase", () => {
   describe("Feature: I want to register a new user", () => {
@@ -38,6 +42,33 @@ describe("RegisterUseCase", () => {
       const { user } = ResultUtils.unwrap(result);
       expect(user.username).toBe("johndoe");
       expect(user.hashedPassword).toBe("123456");
+    });
+  });
+
+  describe("Feature: the username is already taken", () => {
+    let useCase: RegisterUseCase;
+
+    beforeEach(() => {
+      const dateProvider = mock<IDateProvider>({ now: () => new Date() });
+      const idProvider = mock<IIDProvider>({ generate: () => "1" });
+      const authRepository = mock<IAuthRepository>({
+        register: async (user) => {
+          throw new UsernameAlreadyTakenException();
+        },
+      });
+
+      useCase = new RegisterUseCase(dateProvider, idProvider, authRepository);
+    });
+
+    it("should create a new user with the given data", async () => {
+      const result = await useCase.execute({
+        username: "johndoe",
+        password: "123456",
+      });
+
+      expect(result.ok).toBe(false);
+      const error = ResultUtils.getError(result);
+      expect(error.message).toBe("Username already taken");
     });
   });
 
