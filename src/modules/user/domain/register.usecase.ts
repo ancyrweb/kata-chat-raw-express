@@ -1,4 +1,4 @@
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import { Result, ResultUtils } from "../../../shared/result";
 import { AbstractUseCase } from "../../../shared/use-case";
 import { UnregisteredUser } from "./unregistered-user";
@@ -27,6 +27,7 @@ type Output = {
   user: User;
 };
 
+@injectable()
 export class RegisterUseCase extends AbstractUseCase<Input, Output> {
   constructor(
     @inject(I_DATE_PROVIDER) private readonly dateProvider: IDateProvider,

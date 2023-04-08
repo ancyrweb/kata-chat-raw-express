@@ -3,6 +3,7 @@ import { getContainer } from "../framework/container";
 import { InversifyExpressServer } from "inversify-express-utils";
 
 import "../modules/core/domain/app/core.controller";
+import "../modules/user/domain/app/user.controller";
 
 const server = new InversifyExpressServer(getContainer());
 server.setConfig((app) => {
