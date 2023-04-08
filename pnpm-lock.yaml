@@ -19,6 +19,12 @@ dependencies:
   "@typescript-eslint/parser":
     specifier: ^5.57.1
     version: 5.57.1(eslint@8.38.0)(typescript@5.0.4)
+  date-fns:
+    specifier: ^2.29.3
+    version: 2.29.3
+  deep-object-diff:
+    specifier: ^1.1.9
+    version: 1.1.9
   eslint-config-prettier:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.38.0)
@@ -31,6 +37,9 @@ dependencies:
   inversify:
     specifier: ^6.0.1
     version: 6.0.1
+  inversify-express-utils:
+    specifier: ^6.4.3
+    version: 6.4.3
   jest:
     specifier: ^29.5.0
     version: 29.5.0(@types/node@18.15.11)(ts-node@10.9.1)
@@ -52,6 +61,9 @@ dependencies:
   reflect-metadata:
     specifier: ^0.1.13
     version: 0.1.13
+  runtypes:
+    specifier: ^6.6.0
+    version: 6.6.0
   supertest:
     specifier: ^6.3.3
     version: 6.3.3
@@ -2156,6 +2168,14 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
 
+  /date-fns@2.29.3:
+    resolution:
+      {
+        integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==,
+      }
+    engines: { node: ">=0.11" }
+    dev: false
+
   /debug@2.6.9:
     resolution:
       {
@@ -2210,6 +2230,13 @@ packages:
       {
         integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==,
       }
+
+  /deep-object-diff@1.1.9:
+    resolution:
+      {
+        integrity: sha512-Rn+RuwkmkDwCi2/oXOFS9Gsr5lJZu/yTGpK7wAaAIE75CC+LCGEZHpY6VQJa/RoJcrmaA/docWJZvYohlNkWPA==,
+      }
+    dev: false
 
   /deepmerge@4.3.1:
     resolution:
@@ -3422,6 +3449,13 @@ packages:
       toidentifier: 1.0.1
     dev: false
 
+  /http-status-codes@2.2.0:
+    resolution:
+      {
+        integrity: sha512-feERVo9iWxvnejp3SEfm/+oNG517npqL2/PIA8ORjyOZjGC7TwCRQsZylciLS64i6pJ0wRYz3rkXLRwbtFa8Ng==,
+      }
+    dev: false
+
   /human-signals@1.1.1:
     resolution:
       {
@@ -3526,6 +3560,19 @@ packages:
       has: 1.0.3
       side-channel: 1.0.4
     dev: true
+
+  /inversify-express-utils@6.4.3:
+    resolution:
+      {
+        integrity: sha512-7YvEXeZ912N9hAQ9x0+q9zGV670I1imaIQJzzaBXdPQQiodPEGCO6sq53ODczgyP6M6x4kkQNsu9MlzQbVCtAQ==,
+      }
+    dependencies:
+      express: 4.18.2
+      http-status-codes: 2.2.0
+      inversify: 6.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /inversify@6.0.1:
     resolution:
@@ -5252,6 +5299,13 @@ packages:
       }
     dependencies:
       queue-microtask: 1.2.3
+
+  /runtypes@6.6.0:
+    resolution:
+      {
+        integrity: sha512-ddM7sgB3fyboDlBzEYFQ04L674sKjbs4GyW2W32N/5Ae47NRd/GyMASPC2PFw8drPHYGEcZ0mZ26r5RcB8msfQ==,
+      }
+    dev: false
 
   /safe-buffer@5.2.1:
     resolution:

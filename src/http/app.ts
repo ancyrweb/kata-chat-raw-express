@@ -1,11 +1,12 @@
 import express from "express";
-import { getContainer } from "../modules/framework/container";
-import { CoreController } from "../modules/core/core.controller";
+import { getContainer } from "../framework/container";
+import { InversifyExpressServer } from "inversify-express-utils";
 
-export const app = express();
+import "../modules/core/domain/app/core.controller";
 
-app.get("/", async (req, res) => {
-  const result = await getContainer().get(CoreController).getIndex();
-
-  res.send(result);
+const server = new InversifyExpressServer(getContainer());
+server.setConfig((app) => {
+  app.use(express.json());
 });
+
+export const app = server.build();
