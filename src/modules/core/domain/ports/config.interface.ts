@@ -8,4 +8,6 @@ export enum Environment {
 
 export interface IConfig {
   getEnvironment(): Environment;
+  getVarDirectory(): string;
+  getFSDBDirectory(): string;
 }

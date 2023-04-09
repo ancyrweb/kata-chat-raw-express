@@ -9,4 +9,5 @@ export default {
   testEnvironment: "node",
   testRegex: "\\.integration\\.test\\.ts$",
   maxWorkers: 1,
+  setupFilesAfterEnv: ["./src/testing/jest.setup.integration.ts"],
 };

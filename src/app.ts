@@ -10,7 +10,6 @@ import { SystemIDProvider } from "./modules/core/infra/system.id-provider";
 import { I_RANDOM_PROVIDER } from "./modules/core/domain/ports/random-provider.interface";
 import { SystemRandomProvider } from "./modules/core/infra/system.random-provider";
 import { I_AUTH_REPOSITORY } from "./modules/user/domain/auth-repository.interface";
-import { InMemoryAuthRepository } from "./modules/user/infra/inmemory.auth-repository";
 import { RegisterUseCase } from "./modules/user/domain/register.usecase";
 import { LoginUseCase } from "./modules/user/domain/login.usecase";
 import { UserPresenter } from "./modules/user/domain/presenter/user.presenter";
@@ -25,6 +24,7 @@ import { SystemConfig } from "./modules/core/infra/system.config";
 // Controllers
 import "./modules/core/domain/app/core.controller";
 import "./modules/user/domain/app/auth.controller";
+import { FSAuthRepository } from "./modules/user/infra/fs.auth-repository";
 
 export class App extends BaseKernel {
   public inject(container: Container): void {
@@ -41,10 +41,7 @@ export class App extends BaseKernel {
       .inSingletonScope();
     container.bind(I_CONFIG).to(SystemConfig).inSingletonScope();
 
-    container
-      .bind(I_AUTH_REPOSITORY)
-      .to(InMemoryAuthRepository)
-      .inSingletonScope();
+    container.bind(I_AUTH_REPOSITORY).to(FSAuthRepository).inSingletonScope();
 
     container.bind(CoreService).toSelf().inSingletonScope();
 

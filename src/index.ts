@@ -5,3 +5,5 @@ async function main() {
   await app.setup();
   app.start();
 }
+
+main();

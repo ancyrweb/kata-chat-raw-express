@@ -1,4 +1,6 @@
 import { inject, injectable } from "inversify";
+import { addMonths } from "date-fns";
+
 import { AbstractUseCase } from "../../../shared/use-case";
 import {
   IAuthRepository,
@@ -19,7 +21,6 @@ import {
   IRandomProvider,
   I_RANDOM_PROVIDER,
 } from "../../core/domain/ports/random-provider.interface";
-import { addMonths } from "date-fns";
 
 type Input = {
   username: string;
