@@ -20,6 +20,8 @@ import {
 import { SystemLogger } from "../modules/core/infra/system.logger";
 import { SystemEventDispatcher } from "../modules/core/infra/system.event-dispatcher";
 import { I_EVENT_DISPATCHER } from "../modules/core/domain/ports/event-dispatcher.interface";
+import { I_CONFIG } from "../modules/core/domain/ports/config.interface";
+import { SystemConfig } from "../modules/core/infra/system.config";
 
 const container = new Container();
 container.bind(I_DATE_PROVIDER).to(SystemDateProvider).inSingletonScope();
@@ -27,6 +29,7 @@ container.bind(I_ID_PROVIDER).to(SystemIDProvider).inSingletonScope();
 container.bind(I_RANDOM_PROVIDER).to(SystemRandomProvider).inSingletonScope();
 container.bind(I_LOGGER).to(SystemLogger).inSingletonScope();
 container.bind(I_EVENT_DISPATCHER).to(SystemEventDispatcher).inSingletonScope();
+container.bind(I_CONFIG).to(SystemConfig).inSingletonScope();
 
 container.bind(I_AUTH_REPOSITORY).to(InMemoryAuthRepository).inSingletonScope();
 
