@@ -2,7 +2,7 @@ import request from "supertest";
 import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
-} from "../domain/auth-repository.interface";
+} from "../domain/ports/auth-repository.interface";
 import { UnregisteredUser } from "../domain/unregistered-user";
 import { App } from "../../../app";
 

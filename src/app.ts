@@ -9,7 +9,7 @@ import { I_ID_PROVIDER } from "./modules/core/domain/ports/id-provider.interface
 import { SystemIDProvider } from "./modules/core/infra/system.id-provider";
 import { I_RANDOM_PROVIDER } from "./modules/core/domain/ports/random-provider.interface";
 import { SystemRandomProvider } from "./modules/core/infra/system.random-provider";
-import { I_AUTH_REPOSITORY } from "./modules/user/domain/auth-repository.interface";
+import { I_AUTH_REPOSITORY } from "./modules/user/domain/ports/auth-repository.interface";
 import { RegisterUseCase } from "./modules/user/domain/register.usecase";
 import { LoginUseCase } from "./modules/user/domain/login.usecase";
 import { UserPresenter } from "./modules/user/domain/presenter/user.presenter";

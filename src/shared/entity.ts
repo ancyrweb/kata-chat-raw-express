@@ -33,6 +33,13 @@ export abstract class AbstractEntity<T extends Identifiable> {
   get id() {
     return this.state.id;
   }
+
+  commit() {
+    this.initialState = { ...this.state };
+    this.state = { ...this.state };
+
+    Object.freeze(this.initialState);
+  }
 }
 
 export type ExtractState<T> = T extends AbstractEntity<infer U> ? U : never;

@@ -15,7 +15,7 @@ import { PlainPassword } from "./value-object/plain-password.value-object";
 import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
-} from "./auth-repository.interface";
+} from "./ports/auth-repository.interface";
 import { User } from "./user";
 
 type Input = {

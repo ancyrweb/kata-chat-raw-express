@@ -5,7 +5,7 @@ import { IIDProvider } from "../../core/domain/ports/id-provider.interface";
 import {
   IAuthRepository,
   InvalidCredentialsException,
-} from "./auth-repository.interface";
+} from "./ports/auth-repository.interface";
 import { User } from "./user";
 import { ResultUtils } from "../../../shared/result";
 import { LoginUseCase } from "./login.usecase";

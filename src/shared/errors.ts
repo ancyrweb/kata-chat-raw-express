@@ -39,8 +39,8 @@ export class ForbiddenException extends AppException {
 }
 
 export class NotFoundException extends AppException {
-  constructor(message: string, code: string) {
-    super(message, 404, code);
+  constructor(message: string) {
+    super(message, 404, "NOT_FOUND");
   }
 }
 
@@ -53,5 +53,11 @@ export class ConflictException extends AppException {
 export class InternalServerErrorException extends AppException {
   constructor(message: string, code: string) {
     super(message, 500, code);
+  }
+}
+
+export class DomainException extends AppException {
+  constructor(message: string, code: string) {
+    super(message, 400, code);
   }
 }

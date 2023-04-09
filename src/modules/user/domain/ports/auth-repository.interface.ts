@@ -1,7 +1,7 @@
-import { AppException, BadClientException } from "../../../shared/errors";
-import { Token } from "./token";
-import { UnregisteredUser } from "./unregistered-user";
-import { User } from "./user";
+import { AppException, BadClientException } from "../../../../shared/errors";
+import { Token } from "../token";
+import { UnregisteredUser } from "../unregistered-user";
+import { User } from "../user";
 
 export const I_AUTH_REPOSITORY = Symbol("I_AUTH_REPOSITORY");
 

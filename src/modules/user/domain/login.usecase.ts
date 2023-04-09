@@ -5,7 +5,7 @@ import { AbstractUseCase } from "../../../shared/use-case";
 import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
-} from "./auth-repository.interface";
+} from "./ports/auth-repository.interface";
 import { Token } from "./token";
 import {
   IDateProvider,

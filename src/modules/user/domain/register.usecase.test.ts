@@ -5,7 +5,7 @@ import { IIDProvider } from "../../core/domain/ports/id-provider.interface";
 import {
   IAuthRepository,
   UsernameAlreadyTakenException,
-} from "./auth-repository.interface";
+} from "./ports/auth-repository.interface";
 import { RegisterUseCase } from "./register.usecase";
 import { User } from "./user";
 import { ResultUtils } from "../../../shared/result";

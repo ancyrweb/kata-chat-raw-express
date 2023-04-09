@@ -3,7 +3,7 @@ import {
   IAuthRepository,
   InvalidCredentialsException,
   UsernameAlreadyTakenException,
-} from "../domain/auth-repository.interface";
+} from "../domain/ports/auth-repository.interface";
 import { Token } from "../domain/token";
 import { UnregisteredUser } from "../domain/unregistered-user";
 import { User } from "../domain/user";
