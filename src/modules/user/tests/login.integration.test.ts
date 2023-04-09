@@ -1,17 +1,22 @@
 import request from "supertest";
-import { app } from "../../../http/app";
-import { getContainer } from "../../../framework/container";
 import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
 } from "../domain/auth-repository.interface";
 import { UnregisteredUser } from "../domain/unregistered-user";
+import { App } from "../../../app";
+
+let app: App;
 
 describe("Feature: Logging-in the user", () => {
   describe("Case: logging with an account", () => {
     beforeEach(async () => {
-      const authRepository =
-        getContainer().get<IAuthRepository>(I_AUTH_REPOSITORY);
+      app = new App();
+      await app.setup();
+
+      const authRepository = app
+        .getContainer()
+        .get<IAuthRepository>(I_AUTH_REPOSITORY);
 
       await authRepository.register(
         new UnregisteredUser({
@@ -25,7 +30,7 @@ describe("Feature: Logging-in the user", () => {
     });
 
     it("should log in the user", async () => {
-      const result = await request(app).post("/auth/login").send({
+      const result = await request(app.getHttp()).post("/auth/login").send({
         username: "johndoe",
         password: "azerty",
       });
