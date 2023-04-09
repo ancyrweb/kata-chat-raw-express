@@ -34,3 +34,5 @@ export abstract class AbstractEntity<T extends Identifiable> {
     return this.state.id;
   }
 }
+
+export type ExtractState<T> = T extends AbstractEntity<infer U> ? U : never;
