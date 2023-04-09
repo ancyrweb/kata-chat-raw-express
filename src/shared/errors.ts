@@ -9,7 +9,49 @@ export class ErrorUtils {
 }
 
 export class AppException extends Error {
-  constructor(message: string, public code: string) {
+  constructor(message: string, public statusCode: number, public code: string) {
     super(message);
+  }
+}
+
+export class BadClientException extends AppException {
+  constructor(message: string, code: string) {
+    super(message, 400, code);
+  }
+}
+
+export class ValidationException extends AppException {
+  constructor(message: string, code: string) {
+    super(message, 400, code);
+  }
+}
+
+export class UnauthorizedException extends AppException {
+  constructor(message: string, code: string) {
+    super(message, 401, code);
+  }
+}
+
+export class ForbiddenException extends AppException {
+  constructor(message: string, code: string) {
+    super(message, 403, code);
+  }
+}
+
+export class NotFoundException extends AppException {
+  constructor(message: string, code: string) {
+    super(message, 404, code);
+  }
+}
+
+export class ConflictException extends AppException {
+  constructor(message: string, code: string) {
+    super(message, 409, code);
+  }
+}
+
+export class InternalServerErrorException extends AppException {
+  constructor(message: string, code: string) {
+    super(message, 500, code);
   }
 }
