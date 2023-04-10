@@ -22,6 +22,8 @@ export interface IAuthRepository {
 
   createAccessToken(apiToken: APIToken): Promise<AccessToken>;
   authenticate(value: string): Promise<AuthenticatedUser>;
+
+  findUserById(id: string): Promise<OrNull<User>>;
 }
 
 export type AccessTokenPayload = {

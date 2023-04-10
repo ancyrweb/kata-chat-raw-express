@@ -137,6 +137,15 @@ export class FSAuthRepository implements IAuthRepository {
       username: user.username,
     });
   }
+
+  async findUserById(id: string): Promise<OrNull<User>> {
+    const user = this.users.find((u) => u.id === id);
+    if (!user) {
+      return null;
+    }
+
+    return new User(user);
+  }
 }
 
 export type FSDB_User = ExtractState<User>;

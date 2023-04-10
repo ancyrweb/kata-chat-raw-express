@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import { AppException, InternalServerErrorException } from "./errors";
 
 export class FSDB<T> {
   private items: T[] = [];
@@ -54,5 +55,11 @@ export class FSDB<T> {
 
   public clear() {
     fs.unlinkSync(this.getFilePath());
+  }
+}
+
+export class FSDBNotFoundException extends InternalServerErrorException {
+  constructor() {
+    super("Failed to find relation in infrastructure", "fsdb_not_found");
   }
 }

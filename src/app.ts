@@ -24,15 +24,17 @@ import { FSAuthRepository } from "./modules/user/infra/adapters/fs.auth-reposito
 import { AccessTokenPresenter } from "./modules/user/domain/presenter/access-token.presenter";
 import { CreateAccessTokenUseCase } from "./modules/user/domain/create-access-token.usecase";
 import { CreateRoomUseCase } from "./modules/room/domain/create-room.usecase";
+import { RoomPresenter } from "./modules/room/domain/presenters/room.presenter";
+import { I_ROOM_REPOSITORY } from "./modules/room/domain/ports/room.repository-interface";
+import { FSRoomRepository } from "./modules/room/infra/adapters/fs.room-repository";
+import { RenameRoomUseCase } from "./modules/room/domain/rename-room.usecase";
+import { SendMessageUseCase } from "./modules/room/domain/send-message.usecase";
+import { MessagePresenter } from "./modules/room/domain/presenters/message.presenter";
 
 // Controllers
 import "./modules/core/domain/app/core.controller";
 import "./modules/user/app/auth.controller";
 import "./modules/room/app/rooms.controller";
-import { RoomPresenter } from "./modules/room/domain/presenters/room.presenter";
-import { I_ROOM_REPOSITORY } from "./modules/room/domain/ports/room.repository-interface";
-import { FSRoomRepository } from "./modules/room/infra/adapters/fs.room-repository";
-import { RenameRoomUseCase } from "./modules/room/domain/rename-room.usecase";
 
 export class App extends BaseKernel {
   public inject(container: Container): void {
@@ -65,8 +67,10 @@ export class App extends BaseKernel {
     // Room
     container.bind(CreateRoomUseCase).toSelf().inSingletonScope();
     container.bind(RenameRoomUseCase).toSelf().inSingletonScope();
-    container.bind(RoomPresenter).toSelf().inSingletonScope();
+    container.bind(SendMessageUseCase).toSelf().inSingletonScope();
 
+    container.bind(RoomPresenter).toSelf().inSingletonScope();
+    container.bind(MessagePresenter).toSelf().inSingletonScope();
     container.bind(I_ROOM_REPOSITORY).to(FSRoomRepository).inSingletonScope();
   }
 }
