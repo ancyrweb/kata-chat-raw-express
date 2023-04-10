@@ -6,19 +6,19 @@ import {
   InvalidCredentialsException,
   UsernameAlreadyTakenException,
   AccessTokenPayload,
-} from "../domain/ports/auth-repository.interface";
-import { APIToken } from "../domain/api-token";
-import { UnregisteredUser } from "../domain/unregistered-user";
-import { User } from "../domain/user";
-import { AccessToken } from "../domain/access-token";
+} from "../../domain/ports/auth-repository.interface";
+import { APIToken } from "../../domain/api-token";
+import { UnregisteredUser } from "../../domain/unregistered-user";
+import { User } from "../../domain/user";
+import { AccessToken } from "../../domain/access-token";
 import {
   IDateProvider,
   I_DATE_PROVIDER,
-} from "../../core/domain/ports/date-provider.interface";
+} from "../../../core/domain/ports/date-provider.interface";
 import { addHours, addMinutes } from "date-fns";
-import { IConfig, I_CONFIG } from "../../core/domain/ports/config.interface";
-import { AuthenticatedUser } from "../domain/authenticated-user";
-import { NotFoundException } from "../../../shared/errors";
+import { IConfig, I_CONFIG } from "../../../core/domain/ports/config.interface";
+import { AuthenticatedUser } from "../../domain/authenticated-user";
+import { NotFoundException } from "../../../../shared/errors";
 
 @injectable()
 export class InMemoryAuthRepository implements IAuthRepository {

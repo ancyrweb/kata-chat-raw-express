@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import * as path from "path";
-import { Environment, IConfig } from "../domain/ports/config.interface";
+import { Environment, IConfig } from "../../domain/ports/config.interface";
 
 @injectable()
 export class SystemConfig implements IConfig {

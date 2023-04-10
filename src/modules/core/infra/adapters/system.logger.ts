@@ -1,11 +1,11 @@
 import winston from "winston";
-import { ILogger } from "../domain/ports/logger.interface";
+import { ILogger } from "../../domain/ports/logger.interface";
 import { inject, injectable } from "inversify";
 import {
   Environment,
   IConfig,
   I_CONFIG,
-} from "../domain/ports/config.interface";
+} from "../../domain/ports/config.interface";
 
 @injectable()
 export class SystemLogger implements ILogger {

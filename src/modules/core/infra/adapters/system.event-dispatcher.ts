@@ -4,7 +4,7 @@ import EventEmitter from "eventemitter2";
 import {
   IEvent,
   IEventDispatcher,
-} from "../domain/ports/event-dispatcher.interface";
+} from "../../domain/ports/event-dispatcher.interface";
 
 @injectable()
 export class SystemEventDispatcher implements IEventDispatcher {

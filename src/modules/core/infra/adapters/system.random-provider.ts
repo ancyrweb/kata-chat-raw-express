@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { IRandomProvider } from "../domain/ports/random-provider.interface";
+import { IRandomProvider } from "../../domain/ports/random-provider.interface";
 
 @injectable()
 export class SystemRandomProvider implements IRandomProvider {

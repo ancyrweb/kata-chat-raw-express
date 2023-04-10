@@ -1,5 +1,5 @@
-import { Room } from "../domain/room";
-import { RoomOwner } from "../domain/room-owner";
+import { Room } from "../room";
+import { RoomOwner } from "../room-owner";
 
 export const I_ROOM_REPOSITORY = Symbol("IRoomRepository");
 

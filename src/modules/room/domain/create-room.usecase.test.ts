@@ -1,5 +1,5 @@
 import { mock } from "jest-mock-extended";
-import { IRoomRepository } from "../ports/room.repository-interface";
+import { IRoomRepository } from "./ports/room.repository-interface";
 import { CreateRoomUseCase } from "./create-room.usecase";
 import { IDateProvider } from "../../core/domain/ports/date-provider.interface";
 import { IIDProvider } from "../../core/domain/ports/id-provider.interface";

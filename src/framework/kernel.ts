@@ -1,14 +1,16 @@
+import { I_INFRA_AUTH_PROVIDER } from "./../modules/user/infra/auth-provider";
 import { Container } from "inversify";
 import express from "express";
 import expressWinston from "express-winston";
 
-import { InversifyExpressServer } from "inversify-express-utils";
-import { SystemLogger } from "../modules/core/infra/system.logger";
+import { InversifyExpressServer, interfaces } from "inversify-express-utils";
+import { SystemLogger } from "../modules/core/infra/adapters/system.logger";
 import { AppException } from "../shared/errors";
 import {
   ILogger,
   I_LOGGER,
 } from "../modules/core/domain/ports/logger.interface";
+import { AuthProvider } from "../modules/user/infra/auth-provider";
 
 export abstract class BaseKernel {
   protected container: Container;
@@ -22,7 +24,15 @@ export abstract class BaseKernel {
 
   async setup() {
     this.inject(this.container);
-    this.http = new InversifyExpressServer(this.container)
+
+    this.http = new InversifyExpressServer(
+      this.container,
+      null,
+      null,
+      null,
+      // @ts-ignore
+      AuthProvider
+    )
       .setConfig((app) => {
         app.use(
           expressWinston.logger({

@@ -11,7 +11,7 @@ import {
 import {
   IRoomRepository,
   I_ROOM_REPOSITORY,
-} from "../ports/room.repository-interface";
+} from "./ports/room.repository-interface";
 import { Result, ResultUtils } from "../../../shared/result";
 import { AbstractUseCase } from "../../../shared/use-case";
 import { NotFoundException } from "../../../shared/errors";
