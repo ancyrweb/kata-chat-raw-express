@@ -16,7 +16,7 @@ import {
   I_ID_PROVIDER,
 } from "../../core/domain/ports/id-provider.interface";
 import { Result, ResultUtils } from "../../../shared/result";
-import { AuthenticatedUser } from "./authenticated-user";
+import { UserWithAPIToken } from "./user-with-api-token";
 import {
   IRandomProvider,
   I_RANDOM_PROVIDER,
@@ -27,7 +27,7 @@ type Input = {
   password: string;
 };
 
-type Output = AuthenticatedUser;
+type Output = UserWithAPIToken;
 
 @injectable()
 export class LoginUseCase extends AbstractUseCase<Input, Output> {
@@ -46,7 +46,7 @@ export class LoginUseCase extends AbstractUseCase<Input, Output> {
 
     const token = new APIToken({
       id: this.idProvider.generate(),
-      userId: user.id,
+      user,
       value: this.randomProvider.generate(),
       createdAt: this.dateProvider.now(),
       expiresAt: addMonths(this.dateProvider.now(), 3),
@@ -54,6 +54,6 @@ export class LoginUseCase extends AbstractUseCase<Input, Output> {
     });
 
     await this.auth.createAPIToken(token);
-    return ResultUtils.ok(new AuthenticatedUser(user, token));
+    return ResultUtils.ok(new UserWithAPIToken(user, token));
   }
 }

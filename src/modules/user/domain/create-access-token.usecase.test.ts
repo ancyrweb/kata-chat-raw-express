@@ -10,6 +10,7 @@ import { IDateProvider } from "../../core/domain/ports/date-provider.interface";
 import { ResultUtils } from "../../../shared/result";
 import { IEventDispatcher } from "../../core/domain/ports/event-dispatcher.interface";
 import { NotFoundException } from "../../../shared/errors";
+import { User, UserTestFactory } from "./user";
 
 describe("Feature: creating an access token", () => {
   describe("Case: I have a valid API token", () => {
@@ -20,7 +21,10 @@ describe("Feature: creating an access token", () => {
       findAPITokenByValue: jest.fn().mockResolvedValue(
         new APIToken({
           id: "1",
-          userId: "1",
+          user: UserTestFactory.create({
+            id: "1",
+            username: "johndoe",
+          }),
           value: "123",
           createdAt: new Date("2023-01-01"),
           expiresAt: new Date("2023-03-01"),
@@ -126,7 +130,10 @@ describe("Feature: creating an access token", () => {
       findAPITokenByValue: jest.fn().mockResolvedValue(
         new APIToken({
           id: "1",
-          userId: "1",
+          user: UserTestFactory.create({
+            id: "1",
+            username: "johndoe",
+          }),
           value: "123",
           createdAt: new Date("2023-01-01T00:00:00.000"),
           expiresAt: new Date("2023-01-03T00:00:00.000"),
@@ -178,7 +185,10 @@ describe("Feature: creating an access token", () => {
       findAPITokenByValue: jest.fn().mockResolvedValue(
         new APIToken({
           id: "1",
-          userId: "1",
+          user: UserTestFactory.create({
+            id: "1",
+            username: "johndoe",
+          }),
           value: "123",
           createdAt: new Date("2023-01-01T00:00:00.000"),
           expiresAt: new Date("2023-01-07T00:00:00.000"),

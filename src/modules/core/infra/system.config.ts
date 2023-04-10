@@ -24,4 +24,12 @@ export class SystemConfig implements IConfig {
       this.getEnvironment() === Environment.Test ? "fsdb-test" : "fsdb"
     );
   }
+
+  getSecret(): string {
+    return "this is super secret";
+  }
+
+  getAccessTokenValidityTime(): number {
+    return 60 * 60 * 1; // 1 hour
+  }
 }

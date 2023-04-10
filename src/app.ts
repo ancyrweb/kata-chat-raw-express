@@ -13,7 +13,7 @@ import { I_AUTH_REPOSITORY } from "./modules/user/domain/ports/auth-repository.i
 import { RegisterUseCase } from "./modules/user/domain/register.usecase";
 import { LoginUseCase } from "./modules/user/domain/login.usecase";
 import { UserPresenter } from "./modules/user/domain/presenter/user.presenter";
-import { AuthenticatedUserPresenter } from "./modules/user/domain/presenter/authenticated-user.presenter";
+import { UserWithAPITokenPresenter } from "./modules/user/domain/presenter/user-with-api-token.presenter";
 import { I_LOGGER } from "./modules/core/domain/ports/logger.interface";
 import { SystemLogger } from "./modules/core/infra/system.logger";
 import { SystemEventDispatcher } from "./modules/core/infra/system.event-dispatcher";
@@ -25,6 +25,8 @@ import { SystemConfig } from "./modules/core/infra/system.config";
 import "./modules/core/domain/app/core.controller";
 import "./modules/user/domain/app/auth.controller";
 import { FSAuthRepository } from "./modules/user/infra/fs.auth-repository";
+import { AccessTokenPresenter } from "./modules/user/domain/presenter/access-token.presenter";
+import { CreateAccessTokenUseCase } from "./modules/user/domain/create-access-token.usecase";
 
 export class App extends BaseKernel {
   public inject(container: Container): void {
@@ -47,7 +49,10 @@ export class App extends BaseKernel {
 
     container.bind(RegisterUseCase).toSelf().inSingletonScope();
     container.bind(LoginUseCase).toSelf().inSingletonScope();
+    container.bind(CreateAccessTokenUseCase).toSelf().inSingletonScope();
+
     container.bind(UserPresenter).toSelf().inSingletonScope();
-    container.bind(AuthenticatedUserPresenter).toSelf().inSingletonScope();
+    container.bind(UserWithAPITokenPresenter).toSelf().inSingletonScope();
+    container.bind(AccessTokenPresenter).toSelf().inSingletonScope();
   }
 }

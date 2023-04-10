@@ -1,9 +1,10 @@
 import { AbstractEntity } from "../../../shared/entity";
 import { DomainException } from "../../../shared/errors";
+import { User } from "./user";
 
 type TokenData = {
   id: string;
-  userId: string;
+  user: User;
   value: string;
   createdAt: Date;
   expiresAt: Date;
@@ -11,8 +12,8 @@ type TokenData = {
 };
 
 export class APIToken extends AbstractEntity<TokenData> {
-  get userId() {
-    return this.state.userId;
+  get user() {
+    return this.state.user;
   }
 
   get value() {

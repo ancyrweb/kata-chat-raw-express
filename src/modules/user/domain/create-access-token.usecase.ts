@@ -56,7 +56,7 @@ export class CreateAccessTokenUseCase extends AbstractUseCase<Input, Output> {
     const accessToken = await this.auth.createAccessToken(token);
 
     this.eventDispatcher.raise(
-      new AccessTokenCreated({ userId: token.userId })
+      new AccessTokenCreated({ userId: token.user.id })
     );
 
     return ResultUtils.ok(accessToken);

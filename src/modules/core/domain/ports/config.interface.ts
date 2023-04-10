@@ -10,4 +10,6 @@ export interface IConfig {
   getEnvironment(): Environment;
   getVarDirectory(): string;
   getFSDBDirectory(): string;
+  getSecret(): string;
+  getAccessTokenValidityTime(): number;
 }

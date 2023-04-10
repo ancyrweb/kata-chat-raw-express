@@ -1,9 +1,9 @@
 import { injectable } from "inversify";
 import { IPresenter, Presented } from "../../../../shared/presenter";
-import { AuthenticatedUser } from "../authenticated-user";
+import { UserWithAPIToken } from "../user-with-api-token";
 import { UserPresenter } from "./user.presenter";
 
-type Input = AuthenticatedUser;
+type Input = UserWithAPIToken;
 type Output = {
   user: Presented<UserPresenter>;
   token: {
@@ -12,7 +12,7 @@ type Output = {
 };
 
 @injectable()
-export class AuthenticatedUserPresenter implements IPresenter<Input, Output> {
+export class UserWithAPITokenPresenter implements IPresenter<Input, Output> {
   constructor(private readonly userPresenter: UserPresenter) {}
 
   async transform(input: Input): Promise<Output> {

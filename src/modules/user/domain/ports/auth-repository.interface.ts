@@ -8,6 +8,7 @@ import { APIToken } from "../api-token";
 import { UnregisteredUser } from "../unregistered-user";
 import { User } from "../user";
 import { OrNull } from "../../../../types";
+import { AuthenticatedUser } from "../authenticated-user";
 
 export const I_AUTH_REPOSITORY = Symbol("I_AUTH_REPOSITORY");
 
@@ -18,8 +19,15 @@ export interface IAuthRepository {
   createAPIToken(token: APIToken): Promise<void>;
   updateAPIToken(token: APIToken): Promise<void>;
   findAPITokenByValue(value: string): Promise<OrNull<APIToken>>;
+
   createAccessToken(apiToken: APIToken): Promise<AccessToken>;
+  authenticate(value: string): Promise<AuthenticatedUser>;
 }
+
+export type AccessTokenPayload = {
+  sub: string; // user id
+  username: string;
+};
 
 export class UsernameAlreadyTakenException extends BadClientException {
   constructor() {
