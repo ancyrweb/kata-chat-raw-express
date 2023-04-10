@@ -17,6 +17,10 @@ export class FSRoomRepository implements IRoomRepository {
     this.rooms.insert(FSDB_RoomMapper.toFSDB(room));
   }
 
+  async update(room: Room): Promise<void> {
+    this.rooms.update((r) => r.id === room.id, FSDB_RoomMapper.toFSDB(room));
+  }
+
   async findById(id: string): Promise<Room | null> {
     const room = this.rooms.find((r) => r.id === id);
     if (!room) {

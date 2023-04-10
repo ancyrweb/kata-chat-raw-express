@@ -32,6 +32,7 @@ import "./modules/room/app/rooms.controller";
 import { RoomPresenter } from "./modules/room/domain/presenters/room.presenter";
 import { I_ROOM_REPOSITORY } from "./modules/room/domain/ports/room.repository-interface";
 import { FSRoomRepository } from "./modules/room/infra/adapters/fs.room-repository";
+import { RenameRoomUseCase } from "./modules/room/domain/rename-room.usecase";
 
 export class App extends BaseKernel {
   public inject(container: Container): void {
@@ -63,6 +64,7 @@ export class App extends BaseKernel {
 
     // Room
     container.bind(CreateRoomUseCase).toSelf().inSingletonScope();
+    container.bind(RenameRoomUseCase).toSelf().inSingletonScope();
     container.bind(RoomPresenter).toSelf().inSingletonScope();
 
     container.bind(I_ROOM_REPOSITORY).to(FSRoomRepository).inSingletonScope();

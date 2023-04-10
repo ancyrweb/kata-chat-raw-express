@@ -79,7 +79,7 @@ export class FSAuthRepository implements IAuthRepository {
   }
 
   async updateAPIToken(token: APIToken): Promise<void> {
-    this.tokens.rewrite(
+    this.tokens.update(
       (t) => t.id === token.id,
       FSDB_APITokenMapper.toFSDB(token)
     );

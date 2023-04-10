@@ -35,7 +35,7 @@ export class FSDB<T> {
     this.write();
   }
 
-  public rewrite(find: (item: T) => boolean, item: T) {
+  public update(find: (item: T) => boolean, item: T) {
     const index = this.items.findIndex(find);
     this.items[index] = item;
     this.write();
