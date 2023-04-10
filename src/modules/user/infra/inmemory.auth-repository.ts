@@ -4,14 +4,14 @@ import {
   InvalidCredentialsException,
   UsernameAlreadyTakenException,
 } from "../domain/ports/auth-repository.interface";
-import { Token } from "../domain/token";
+import { APIToken } from "../domain/api-token";
 import { UnregisteredUser } from "../domain/unregistered-user";
 import { User } from "../domain/user";
 
 @injectable()
 export class InMemoryAuthRepository implements IAuthRepository {
   private users: User[] = [];
-  private tokens: Token[] = [];
+  private tokens: APIToken[] = [];
 
   async register(user: UnregisteredUser): Promise<User> {
     const existingUser = this.users.find((u) => u.username === user.username);
@@ -43,7 +43,7 @@ export class InMemoryAuthRepository implements IAuthRepository {
     return user;
   }
 
-  async createToken(token: Token): Promise<void> {
+  async createAPIToken(token: APIToken): Promise<void> {
     this.tokens.push(token);
   }
 }

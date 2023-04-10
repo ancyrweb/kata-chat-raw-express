@@ -1,4 +1,5 @@
 import { AbstractEntity } from "../../../shared/entity";
+import { DomainException } from "../../../shared/errors";
 
 type TokenData = {
   id: string;
@@ -9,7 +10,7 @@ type TokenData = {
   expired: boolean;
 };
 
-export class Token extends AbstractEntity<TokenData> {
+export class APIToken extends AbstractEntity<TokenData> {
   get userId() {
     return this.state.userId;
   }
@@ -28,5 +29,25 @@ export class Token extends AbstractEntity<TokenData> {
 
   get expired() {
     return this.state.expired;
+  }
+
+  dateExpired(now: Date) {
+    return this.expiresAt < now;
+  }
+
+  isMarkedAsExpired() {
+    return this.expired;
+  }
+
+  markAsExpired() {
+    this.setState({
+      expired: true,
+    });
+  }
+}
+
+export class TokenExpiredException extends DomainException {
+  constructor() {
+    super("Token is expired", "TOKEN_EXPIRED");
   }
 }

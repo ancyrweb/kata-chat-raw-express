@@ -6,7 +6,7 @@ import {
   InvalidCredentialsException,
   UsernameAlreadyTakenException,
 } from "../domain/ports/auth-repository.interface";
-import { Token } from "../domain/token";
+import { APIToken } from "../domain/api-token";
 import { UnregisteredUser } from "../domain/unregistered-user";
 import { User } from "../domain/user";
 import { FSDB } from "../../../shared/fsdb";
@@ -16,11 +16,11 @@ import { ExtractState } from "../../../shared/entity";
 @injectable()
 export class FSAuthRepository implements IAuthRepository {
   private users: FSDB<ExtractState<User>>;
-  private tokens: FSDB<ExtractState<Token>>;
+  private tokens: FSDB<ExtractState<APIToken>>;
 
   constructor(@inject(I_CONFIG) config: IConfig) {
     this.users = new FSDB<User>(config.getFSDBDirectory(), "users.json");
-    this.tokens = new FSDB<Token>(config.getFSDBDirectory(), "tokens.json");
+    this.tokens = new FSDB<APIToken>(config.getFSDBDirectory(), "tokens.json");
   }
 
   async register(user: UnregisteredUser): Promise<User> {
@@ -57,7 +57,7 @@ export class FSAuthRepository implements IAuthRepository {
     return new User(entry);
   }
 
-  async createToken(token: Token): Promise<void> {
+  async createAPIToken(token: APIToken): Promise<void> {
     this.tokens.insert(token);
   }
 }

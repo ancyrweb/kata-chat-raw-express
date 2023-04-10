@@ -6,7 +6,7 @@ import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
 } from "./ports/auth-repository.interface";
-import { Token } from "./token";
+import { APIToken } from "./api-token";
 import {
   IDateProvider,
   I_DATE_PROVIDER,
@@ -44,7 +44,7 @@ export class LoginUseCase extends AbstractUseCase<Input, Output> {
   async handle(data: Input): Promise<Result<Output>> {
     const user = await this.auth.login(data.username, data.password);
 
-    const token = new Token({
+    const token = new APIToken({
       id: this.idProvider.generate(),
       userId: user.id,
       value: this.randomProvider.generate(),
@@ -53,7 +53,7 @@ export class LoginUseCase extends AbstractUseCase<Input, Output> {
       expired: false,
     });
 
-    await this.auth.createToken(token);
+    await this.auth.createAPIToken(token);
     return ResultUtils.ok(new AuthenticatedUser(user, token));
   }
 }
