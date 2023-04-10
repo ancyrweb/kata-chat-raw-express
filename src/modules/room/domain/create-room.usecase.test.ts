@@ -5,6 +5,7 @@ import { IDateProvider } from "../../core/domain/ports/date-provider.interface";
 import { IIDProvider } from "../../core/domain/ports/id-provider.interface";
 import { RoomOwner } from "./room-owner";
 import { ResultUtils } from "../../../shared/result";
+import { AuthenticatedUser } from "../../user/domain/authenticated-user";
 
 describe("Feature: creating a room", () => {
   describe("Case: creating a room", () => {
@@ -12,7 +13,10 @@ describe("Feature: creating a room", () => {
     let roomRepository: IRoomRepository;
     const input = {
       name: "My Room",
-      ownerId: "123",
+      requester: new AuthenticatedUser({
+        userId: "123",
+        username: "john",
+      }),
     };
 
     beforeEach(() => {
@@ -55,7 +59,10 @@ describe("Feature: creating a room", () => {
 
     const input = {
       name: "My Room",
-      ownerId: "123",
+      requester: new AuthenticatedUser({
+        userId: "123",
+        username: "john",
+      }),
     };
 
     beforeEach(() => {
@@ -90,7 +97,10 @@ describe("Feature: creating a room", () => {
 
     const input = {
       name: "My Room",
-      ownerId: "123",
+      requester: new AuthenticatedUser({
+        userId: "123",
+        username: "john",
+      }),
     };
 
     beforeEach(() => {

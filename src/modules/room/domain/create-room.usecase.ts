@@ -15,10 +15,11 @@ import {
 import { Result, ResultUtils } from "../../../shared/result";
 import { AbstractUseCase } from "../../../shared/use-case";
 import { NotFoundException } from "../../../shared/errors";
+import { AuthenticatedUser } from "../../user/domain/authenticated-user";
 
 type Input = {
   name: string;
-  ownerId: string;
+  requester: AuthenticatedUser;
 };
 
 type Output = Room;
@@ -33,7 +34,10 @@ export class CreateRoomUseCase extends AbstractUseCase<Input, Output> {
     super();
   }
   async handle(data: Input): Promise<Result<Output>> {
-    const owner = await this.roomRepository.findRoomOwnerById(data.ownerId);
+    const owner = await this.roomRepository.findRoomOwnerById(
+      data.requester.userId
+    );
+
     if (!owner) {
       return ResultUtils.fail(new OwnerNotFoundException());
     }
