@@ -29,4 +29,11 @@ export class Room extends AbstractEntity<RoomData> {
   get updatedAt() {
     return this.state.updatedAt;
   }
+
+  rename(name: string, at: Date) {
+    this.setState({
+      name,
+      updatedAt: at,
+    });
+  }
 }

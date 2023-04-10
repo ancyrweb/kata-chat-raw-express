@@ -16,6 +16,11 @@ import { Result, ResultUtils } from "../../../shared/result";
 import { AbstractUseCase } from "../../../shared/use-case";
 import { NotFoundException } from "../../../shared/errors";
 import { AuthenticatedUser } from "../../user/domain/authenticated-user";
+import {
+  AppEvent,
+  IEventDispatcher,
+  I_EVENT_DISPATCHER,
+} from "../../core/domain/ports/event-dispatcher.interface";
 
 type Input = {
   name: string;
@@ -29,6 +34,8 @@ export class CreateRoomUseCase extends AbstractUseCase<Input, Output> {
   constructor(
     @inject(I_ID_PROVIDER) private readonly idProvider: IIDProvider,
     @inject(I_DATE_PROVIDER) private readonly dateProvider: IDateProvider,
+    @inject(I_EVENT_DISPATCHER)
+    private readonly eventDispatcher: IEventDispatcher,
     @inject(I_ROOM_REPOSITORY) private readonly roomRepository: IRoomRepository
   ) {
     super();
@@ -55,6 +62,7 @@ export class CreateRoomUseCase extends AbstractUseCase<Input, Output> {
     await this.roomRepository.create(room);
     owner.commit();
 
+    this.eventDispatcher.raise(new RoomCreatedEvent({ roomId: room.id }));
     return ResultUtils.ok(room);
   }
 }
@@ -64,3 +72,7 @@ export class OwnerNotFoundException extends NotFoundException {
     super("Owner not found");
   }
 }
+
+export class RoomCreatedEvent extends AppEvent<{
+  roomId: string;
+}>(Symbol("RoomCreatedEvent")) {}

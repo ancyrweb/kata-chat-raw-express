@@ -1,16 +1,19 @@
 import { mock } from "jest-mock-extended";
 import { IRoomRepository } from "./ports/room.repository-interface";
-import { CreateRoomUseCase } from "./create-room.usecase";
+import { CreateRoomUseCase, RoomCreatedEvent } from "./create-room.usecase";
 import { IDateProvider } from "../../core/domain/ports/date-provider.interface";
 import { IIDProvider } from "../../core/domain/ports/id-provider.interface";
 import { RoomOwner } from "./room-owner";
 import { ResultUtils } from "../../../shared/result";
 import { AuthenticatedUser } from "../../user/domain/authenticated-user";
+import { IEventDispatcher } from "../../core/domain/ports/event-dispatcher.interface";
 
 describe("Feature: creating a room", () => {
   describe("Case: creating a room", () => {
     let useCase: CreateRoomUseCase;
     let roomRepository: IRoomRepository;
+    let eventDispatcher: ReturnType<typeof mock<IEventDispatcher>>;
+
     const input = {
       name: "My Room",
       requester: new AuthenticatedUser({
@@ -24,6 +27,7 @@ describe("Feature: creating a room", () => {
         now: () => new Date("2023-01-01T00:00:00.000"),
       });
       const idProvider = mock<IIDProvider>({ generate: () => "1" });
+
       roomRepository = mock<IRoomRepository>({
         findRoomOwnerById: jest.fn().mockResolvedValue(
           new RoomOwner({
@@ -33,7 +37,14 @@ describe("Feature: creating a room", () => {
         ),
       });
 
-      useCase = new CreateRoomUseCase(idProvider, dateProvider, roomRepository);
+      eventDispatcher = mock<IEventDispatcher>();
+
+      useCase = new CreateRoomUseCase(
+        idProvider,
+        dateProvider,
+        eventDispatcher,
+        roomRepository
+      );
     });
 
     it("should succeed", async () => {
@@ -51,11 +62,20 @@ describe("Feature: creating a room", () => {
       await useCase.execute(input);
       expect(roomRepository.create).toHaveBeenCalledTimes(1);
     });
+
+    it("should dispatch an event", async () => {
+      await useCase.execute(input);
+      expect(eventDispatcher.raise).toHaveBeenCalledTimes(1);
+
+      const event: RoomCreatedEvent = eventDispatcher.raise.mock.calls[0][0];
+      expect(event.props.roomId).toBe("1");
+    });
   });
 
   describe("Case: creating a room when the client does not exist", () => {
     let useCase: CreateRoomUseCase;
     let roomRepository: IRoomRepository;
+    let eventDispatcher: ReturnType<typeof mock<IEventDispatcher>>;
 
     const input = {
       name: "My Room",
@@ -70,11 +90,18 @@ describe("Feature: creating a room", () => {
         now: () => new Date("2023-01-01T00:00:00.000"),
       });
       const idProvider = mock<IIDProvider>({ generate: () => "1" });
+      eventDispatcher = mock<IEventDispatcher>();
+
       roomRepository = mock<IRoomRepository>({
         findRoomOwnerById: jest.fn().mockResolvedValue(null),
       });
 
-      useCase = new CreateRoomUseCase(idProvider, dateProvider, roomRepository);
+      useCase = new CreateRoomUseCase(
+        idProvider,
+        dateProvider,
+        eventDispatcher,
+        roomRepository
+      );
     });
 
     it("should return an error", async () => {
@@ -94,6 +121,7 @@ describe("Feature: creating a room", () => {
   describe("Case: creating a room when the client can no longer create new rooms", () => {
     let useCase: CreateRoomUseCase;
     let roomRepository: IRoomRepository;
+    let eventDispatcher: ReturnType<typeof mock<IEventDispatcher>>;
 
     const input = {
       name: "My Room",
@@ -117,7 +145,14 @@ describe("Feature: creating a room", () => {
         ),
       });
 
-      useCase = new CreateRoomUseCase(idProvider, dateProvider, roomRepository);
+      eventDispatcher = mock<IEventDispatcher>();
+
+      useCase = new CreateRoomUseCase(
+        idProvider,
+        dateProvider,
+        eventDispatcher,
+        roomRepository
+      );
     });
 
     it("should return an error", async () => {
