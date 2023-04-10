@@ -17,11 +17,11 @@ export class FSDB<T> {
     }
   }
 
-  public getFilePath() {
+  protected getFilePath() {
     return path.resolve(this.filepath, this.filename);
   }
 
-  public write() {
+  protected write() {
     const data = JSON.stringify(this.items);
     fs.writeFileSync(this.getFilePath(), data);
   }
@@ -39,6 +39,17 @@ export class FSDB<T> {
     const index = this.items.findIndex(find);
     this.items[index] = item;
     this.write();
+  }
+
+  public filter(check: (item: T) => boolean): T[] {
+    return this.items.filter(check);
+  }
+
+  public aggregate<TValue>(
+    aggregator: (prev: TValue, item: T) => TValue,
+    initialValue: TValue
+  ) {
+    return this.items.reduce(aggregator, initialValue);
   }
 
   public clear() {

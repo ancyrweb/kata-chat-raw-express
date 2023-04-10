@@ -139,8 +139,8 @@ export class FSAuthRepository implements IAuthRepository {
   }
 }
 
-type FSDB_User = ExtractState<User>;
-type FSDB_APIToken = {
+export type FSDB_User = ExtractState<User>;
+export type FSDB_APIToken = {
   id: string;
   userId: string;
   value: string;
