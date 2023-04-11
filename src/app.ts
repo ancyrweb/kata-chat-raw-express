@@ -35,6 +35,8 @@ import { MessagePresenter } from "./modules/room/domain/presenters/message.prese
 import "./modules/core/domain/app/core.controller";
 import "./modules/user/app/auth.controller";
 import "./modules/room/app/rooms.controller";
+import { MessageListPresenter } from "./modules/room/domain/presenters/message-list.presenter";
+import { GetMessagesUseCase } from "./modules/room/domain/get-messages.uesecase";
 
 export class App extends BaseKernel {
   public inject(container: Container): void {
@@ -68,9 +70,11 @@ export class App extends BaseKernel {
     container.bind(CreateRoomUseCase).toSelf().inSingletonScope();
     container.bind(RenameRoomUseCase).toSelf().inSingletonScope();
     container.bind(SendMessageUseCase).toSelf().inSingletonScope();
+    container.bind(GetMessagesUseCase).toSelf().inSingletonScope();
 
     container.bind(RoomPresenter).toSelf().inSingletonScope();
     container.bind(MessagePresenter).toSelf().inSingletonScope();
+    container.bind(MessageListPresenter).toSelf().inSingletonScope();
     container.bind(I_ROOM_REPOSITORY).to(FSRoomRepository).inSingletonScope();
   }
 }

@@ -11,6 +11,7 @@ import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
 } from "../../../user/domain/ports/auth-repository.interface";
+import { MessageList } from "../../domain/message-list";
 
 @injectable()
 export class FSRoomRepository implements IRoomRepository {
@@ -91,9 +92,9 @@ export class FSRoomRepository implements IRoomRepository {
     });
   }
 
-  async findMessagesByRoomId(roomId: string): Promise<Message[]> {
+  async findMessagesByRoomId(roomId: string): Promise<MessageList> {
     const messages = this.messages.filter((m) => m.roomId === roomId);
-    return Promise.all(
+    const fullMessages = await Promise.all(
       messages.map(async (m) => {
         const user = await this.authRepository.findUserById(m.ownerId);
         if (!user) {
@@ -106,6 +107,8 @@ export class FSRoomRepository implements IRoomRepository {
         });
       })
     );
+
+    return new MessageList({ messages: fullMessages });
   }
 }
 

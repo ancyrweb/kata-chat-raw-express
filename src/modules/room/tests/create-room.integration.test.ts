@@ -51,7 +51,7 @@ describe("Feature: creating a room", () => {
   });
 });
 
-export class Fixture {
+class Fixture {
   public app!: App;
   public authRepository!: IAuthRepository;
   public accessToken!: AccessToken;

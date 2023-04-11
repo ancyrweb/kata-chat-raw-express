@@ -21,16 +21,24 @@ export class AuthIntegration {
       .getContainer()
       .get<IAuthRepository>(I_AUTH_REPOSITORY);
 
+    await authRepository.register(user);
+
+    return this.authenticate(user.id);
+  }
+
+  async authenticate(userId: string) {
+    const authRepository = this.app
+      .getContainer()
+      .get<IAuthRepository>(I_AUTH_REPOSITORY);
+
     const dateProvider = this.app
       .getContainer()
       .get<IDateProvider>(I_DATE_PROVIDER);
 
-    await authRepository.register(user);
-
     const apiToken = new APIToken({
       id: "1",
       user: UserTestFactory.create({
-        id: user.id,
+        id: userId,
       }),
       value: "123",
       createdAt: dateProvider.now(),

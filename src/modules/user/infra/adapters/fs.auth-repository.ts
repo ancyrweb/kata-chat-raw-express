@@ -60,6 +60,10 @@ export class FSAuthRepository implements IAuthRepository {
     return newUser;
   }
 
+  async create(user: User): Promise<void> {
+    this.users.insert(user.getState());
+  }
+
   async login(username: string, password: string): Promise<User> {
     const entry = this.users.find(
       (u) =>

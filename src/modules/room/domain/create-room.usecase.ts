@@ -40,6 +40,7 @@ export class CreateRoomUseCase extends AbstractUseCase<Input, Output> {
   ) {
     super();
   }
+
   async handle(data: Input): Promise<Result<Output>> {
     const owner = await this.roomRepository.findRoomOwnerById(
       data.requester.userId

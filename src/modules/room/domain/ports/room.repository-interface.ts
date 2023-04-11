@@ -1,4 +1,5 @@
 import { Message } from "../message";
+import { MessageList } from "../message-list";
 import { Room } from "../room";
 import { RoomOwner } from "../room-owner";
 
@@ -13,5 +14,5 @@ export interface IRoomRepository {
 
   createMessage(message: Message): Promise<void>;
   findMessageById(id: string): Promise<Message | null>;
-  findMessagesByRoomId(roomId: string): Promise<Message[]>;
+  findMessagesByRoomId(roomId: string): Promise<MessageList>;
 }

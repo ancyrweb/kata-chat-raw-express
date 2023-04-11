@@ -28,6 +28,17 @@ export class RoomOwner extends AbstractEntity<RoomOwnerData> {
   }
 }
 
+export class RoomOwnerTestFactory {
+  static create(data: Partial<RoomOwnerData> = {}): RoomOwner {
+    const defaultData: RoomOwnerData = {
+      id: "room-owner-id",
+      roomsCreatedAmount: 0,
+    };
+
+    return new RoomOwner({ ...defaultData, ...data });
+  }
+}
+
 export class ExceededMaxAmountOfRoomsError extends DomainException {
   constructor() {
     super(

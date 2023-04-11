@@ -14,6 +14,7 @@ export const I_AUTH_REPOSITORY = Symbol("I_AUTH_REPOSITORY");
 
 export interface IAuthRepository {
   register(user: UnregisteredUser): Promise<User>;
+  create(user: User): Promise<void>;
   login(username: string, password: string): Promise<User>;
 
   createAPIToken(token: APIToken): Promise<void>;

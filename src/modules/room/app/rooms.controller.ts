@@ -6,6 +6,7 @@ import {
   injectHttpContext,
   requestParam,
   httpPut,
+  httpGet,
 } from "inversify-express-utils";
 import { Request } from "express";
 import { inject } from "inversify";
@@ -20,6 +21,8 @@ import { Presented } from "../../../shared/presenter";
 import { RenameRoomUseCase } from "../domain/rename-room.usecase";
 import { MessagePresenter } from "../domain/presenters/message.presenter";
 import { SendMessageUseCase } from "../domain/send-message.usecase";
+import { MessageListPresenter } from "../domain/presenters/message-list.presenter";
+import { GetMessagesUseCase } from "../domain/get-messages.uesecase";
 
 @controller("/rooms")
 export class RoomsController extends BaseController {
@@ -31,10 +34,14 @@ export class RoomsController extends BaseController {
     private readonly renameRoomUseCase: RenameRoomUseCase,
     @inject(SendMessageUseCase)
     private readonly sendMessageUseCase: SendMessageUseCase,
+    @inject(GetMessagesUseCase)
+    private readonly getMessagesUseCase: GetMessagesUseCase,
 
     @inject(RoomPresenter) private readonly roomPresenter: RoomPresenter,
     @inject(MessagePresenter)
-    private readonly messagePresenter: MessagePresenter
+    private readonly messagePresenter: MessagePresenter,
+    @inject(MessageListPresenter)
+    private readonly messageListPresenter: MessageListPresenter
   ) {
     super(httpContext);
   }
@@ -84,5 +91,19 @@ export class RoomsController extends BaseController {
 
     const message = ResultUtils.unwrap(result);
     return this.messagePresenter.transform(message);
+  }
+
+  @mustBeAuthenticated()
+  @statusCode(200)
+  @httpGet("/:id/messages")
+  async getMessages(
+    @requestParam("id") id: string
+  ): Promise<Presented<MessageListPresenter>> {
+    const result = await this.getMessagesUseCase.execute({
+      roomId: id,
+    });
+
+    const message = ResultUtils.unwrap(result);
+    return this.messageListPresenter.transform(message);
   }
 }
