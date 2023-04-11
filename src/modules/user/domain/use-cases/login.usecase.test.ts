@@ -1,15 +1,15 @@
 import { mock } from "jest-mock-extended";
 
-import { IDateProvider } from "../../core/domain/ports/date-provider.interface";
-import { IIDProvider } from "../../core/domain/ports/id-provider.interface";
+import { IDateProvider } from "../../../core/domain/ports/date-provider.interface";
+import { IIDProvider } from "../../../core/domain/ports/id-provider.interface";
 import {
   IAuthRepository,
   InvalidCredentialsException,
-} from "./ports/auth-repository.interface";
-import { UserTestFactory } from "./user";
-import { ResultUtils } from "../../../shared/result";
+} from "../ports/auth-repository.interface";
+import { UserTestFactory } from "../entity/user";
+import { ResultUtils } from "../../../../shared/result";
 import { LoginUseCase } from "./login.usecase";
-import { IRandomProvider } from "../../core/domain/ports/random-provider.interface";
+import { IRandomProvider } from "../../../core/domain/ports/random-provider.interface";
 describe("Feature: I want to login", () => {
   describe("Case: it should login when provided the correct credentials", () => {
     let useCase: LoginUseCase;

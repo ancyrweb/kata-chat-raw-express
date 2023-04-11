@@ -1,14 +1,14 @@
 import { mock } from "jest-mock-extended";
 
-import { IDateProvider } from "../../core/domain/ports/date-provider.interface";
-import { IIDProvider } from "../../core/domain/ports/id-provider.interface";
+import { IDateProvider } from "../../../core/domain/ports/date-provider.interface";
+import { IIDProvider } from "../../../core/domain/ports/id-provider.interface";
 import {
   IAuthRepository,
   UsernameAlreadyTakenException,
-} from "./ports/auth-repository.interface";
+} from "../ports/auth-repository.interface";
 import { RegisterUseCase } from "./register.usecase";
-import { User } from "./user";
-import { ResultUtils } from "../../../shared/result";
+import { User } from "../entity/user";
+import { ResultUtils } from "../../../../shared/result";
 
 describe("RegisterUseCase", () => {
   describe("Feature: I want to register a new user", () => {

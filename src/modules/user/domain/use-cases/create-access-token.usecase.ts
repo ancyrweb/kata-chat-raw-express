@@ -1,22 +1,22 @@
 import { inject, injectable } from "inversify";
-import { AccessToken } from "./access-token";
-import { AbstractUseCase } from "../../../shared/use-case";
+import { AccessToken } from "../entity/access-token";
+import { AbstractUseCase } from "../../../../shared/use-case";
 import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
-} from "./ports/auth-repository.interface";
-import { Result, ResultUtils } from "../../../shared/result";
-import { NotFoundException } from "../../../shared/errors";
-import { TokenExpiredException } from "./api-token";
+} from "../ports/auth-repository.interface";
+import { Result, ResultUtils } from "../../../../shared/result";
+import { NotFoundException } from "../../../../shared/errors";
+import { TokenExpiredException } from "../entity/api-token";
 import {
   IDateProvider,
   I_DATE_PROVIDER,
-} from "../../core/domain/ports/date-provider.interface";
+} from "../../../core/domain/ports/date-provider.interface";
 import {
   AppEvent,
   IEventDispatcher,
   I_EVENT_DISPATCHER,
-} from "../../core/domain/ports/event-dispatcher.interface";
+} from "../../../core/domain/ports/event-dispatcher.interface";
 
 type Input = {
   apiTokenValue: string;

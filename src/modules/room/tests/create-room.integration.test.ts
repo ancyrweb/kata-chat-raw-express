@@ -2,8 +2,8 @@ import request from "supertest";
 import { IAuthRepository } from "../../user/domain/ports/auth-repository.interface";
 import { App } from "../../../app";
 import { AuthIntegration } from "../../user/tests-utils/auth-integration";
-import { UnregisteredUserTestFactory } from "../../user/domain/unregistered-user";
-import { AccessToken } from "../../user/domain/access-token";
+import { UnregisteredUserTestFactory } from "../../user/domain/entity/unregistered-user";
+import { AccessToken } from "../../user/domain/entity/access-token";
 describe("Feature: creating a room", () => {
   describe("Case: the room is valid", () => {
     let fixture: Fixture;

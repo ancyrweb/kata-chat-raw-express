@@ -1,7 +1,7 @@
 import { mock } from "jest-mock-extended";
 import { IDateProvider } from "../../../core/domain/ports/date-provider.interface";
 import { IRoomRepository } from "../ports/room.repository-interface";
-import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
+import { AuthenticatedUser } from "../../../user/domain/entity/authenticated-user";
 import { Room } from "../entity/room";
 import { RoomOwner } from "../entity/room-owner";
 import { IEventDispatcher } from "../../../core/domain/ports/event-dispatcher.interface";

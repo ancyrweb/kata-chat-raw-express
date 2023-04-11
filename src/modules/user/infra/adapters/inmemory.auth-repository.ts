@@ -7,17 +7,17 @@ import {
   UsernameAlreadyTakenException,
   AccessTokenPayload,
 } from "../../domain/ports/auth-repository.interface";
-import { APIToken } from "../../domain/api-token";
-import { UnregisteredUser } from "../../domain/unregistered-user";
-import { User } from "../../domain/user";
-import { AccessToken } from "../../domain/access-token";
+import { APIToken } from "../../domain/entity/api-token";
+import { UnregisteredUser } from "../../domain/entity/unregistered-user";
+import { User } from "../../domain/entity/user";
+import { AccessToken } from "../../domain/entity/access-token";
 import {
   IDateProvider,
   I_DATE_PROVIDER,
 } from "../../../core/domain/ports/date-provider.interface";
 import { addHours, addMinutes } from "date-fns";
 import { IConfig, I_CONFIG } from "../../../core/domain/ports/config.interface";
-import { AuthenticatedUser } from "../../domain/authenticated-user";
+import { AuthenticatedUser } from "../../domain/entity/authenticated-user";
 import { NotFoundException } from "../../../../shared/errors";
 
 @injectable()

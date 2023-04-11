@@ -1,6 +1,6 @@
 import { Result, ResultUtils } from "../../../../shared/result";
 import { AbstractUseCase } from "../../../../shared/use-case";
-import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
+import { AuthenticatedUser } from "../../../user/domain/entity/authenticated-user";
 import { Room } from "../entity/room";
 import { inject } from "inversify";
 import {

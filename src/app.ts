@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { Container } from "inversify";
 
 import { BaseKernel } from "./framework/kernel";
-import { CoreService } from "./modules/core/domain/app/core.service";
+import { CoreService } from "./modules/core/app/core.service";
 import { I_DATE_PROVIDER } from "./modules/core/domain/ports/date-provider.interface";
 import { SystemDateProvider } from "./modules/core/infra/adapters/system.date-provider";
 import { I_ID_PROVIDER } from "./modules/core/domain/ports/id-provider.interface";
@@ -10,8 +10,8 @@ import { SystemIDProvider } from "./modules/core/infra/adapters/system.id-provid
 import { I_RANDOM_PROVIDER } from "./modules/core/domain/ports/random-provider.interface";
 import { SystemRandomProvider } from "./modules/core/infra/adapters/system.random-provider";
 import { I_AUTH_REPOSITORY } from "./modules/user/domain/ports/auth-repository.interface";
-import { RegisterUseCase } from "./modules/user/domain/register.usecase";
-import { LoginUseCase } from "./modules/user/domain/login.usecase";
+import { RegisterUseCase } from "./modules/user/domain/use-cases/register.usecase";
+import { LoginUseCase } from "./modules/user/domain/use-cases/login.usecase";
 import { UserPresenter } from "./modules/user/domain/presenter/user.presenter";
 import { UserWithAPITokenPresenter } from "./modules/user/domain/presenter/user-with-api-token.presenter";
 import { I_LOGGER } from "./modules/core/domain/ports/logger.interface";
@@ -22,7 +22,7 @@ import { I_CONFIG } from "./modules/core/domain/ports/config.interface";
 import { SystemConfig } from "./modules/core/infra/adapters/system.config";
 import { FSAuthRepository } from "./modules/user/infra/adapters/fs.auth-repository";
 import { AccessTokenPresenter } from "./modules/user/domain/presenter/access-token.presenter";
-import { CreateAccessTokenUseCase } from "./modules/user/domain/create-access-token.usecase";
+import { CreateAccessTokenUseCase } from "./modules/user/domain/use-cases/create-access-token.usecase";
 import { CreateRoomUseCase } from "./modules/room/domain/usecases/create-room.usecase";
 import { RoomPresenter } from "./modules/room/domain/presenters/room.presenter";
 import { I_ROOM_REPOSITORY } from "./modules/room/domain/ports/room.repository-interface";
@@ -32,7 +32,7 @@ import { SendMessageUseCase } from "./modules/room/domain/usecases/send-message.
 import { MessagePresenter } from "./modules/room/domain/presenters/message.presenter";
 
 // Controllers
-import "./modules/core/domain/app/core.controller";
+import "./modules/core/app/core.controller";
 import "./modules/user/app/auth.controller";
 import "./modules/room/app/rooms.controller";
 import { MessageListPresenter } from "./modules/room/domain/presenters/message-list.presenter";

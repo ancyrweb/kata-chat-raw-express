@@ -1,5 +1,5 @@
 import { interfaces } from "inversify-express-utils";
-import { AuthenticatedUser } from "../domain/authenticated-user";
+import { AuthenticatedUser } from "../domain/entity/authenticated-user";
 
 export class AuthenticatedUserPrincipal implements interfaces.Principal {
   constructor(private readonly user: AuthenticatedUser) {}

@@ -1,8 +1,8 @@
 import request from "supertest";
 import { App } from "../../../app";
 import { AuthIntegration } from "../../user/tests-utils/auth-integration";
-import { UnregisteredUserTestFactory } from "../../user/domain/unregistered-user";
-import { AccessToken } from "../../user/domain/access-token";
+import { UnregisteredUserTestFactory } from "../../user/domain/entity/unregistered-user";
+import { AccessToken } from "../../user/domain/entity/access-token";
 import {
   IRoomRepository,
   I_ROOM_REPOSITORY,

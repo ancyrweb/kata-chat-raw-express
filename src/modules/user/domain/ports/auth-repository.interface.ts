@@ -3,12 +3,12 @@ import {
   BadClientException,
   NotFoundException,
 } from "../../../../shared/errors";
-import { AccessToken } from "../access-token";
-import { APIToken } from "../api-token";
-import { UnregisteredUser } from "../unregistered-user";
-import { User } from "../user";
+import { AccessToken } from "../entity/access-token";
+import { APIToken } from "../entity/api-token";
+import { UnregisteredUser } from "../entity/unregistered-user";
+import { User } from "../entity/user";
 import { OrNull } from "../../../../types";
-import { AuthenticatedUser } from "../authenticated-user";
+import { AuthenticatedUser } from "../entity/authenticated-user";
 
 export const I_AUTH_REPOSITORY = Symbol("I_AUTH_REPOSITORY");
 

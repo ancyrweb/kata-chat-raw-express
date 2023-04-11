@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { IPresenter } from "../../../../shared/presenter";
-import { AccessToken } from "../access-token";
+import { AccessToken } from "../entity/access-token";
 
 type Input = AccessToken;
 type Output = {

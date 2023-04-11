@@ -5,9 +5,9 @@ import {
 } from "../../user/domain/ports/auth-repository.interface";
 import { App } from "../../../app";
 import { AuthIntegration } from "../../user/tests-utils/auth-integration";
-import { UnregisteredUserTestFactory } from "../../user/domain/unregistered-user";
-import { AccessToken } from "../../user/domain/access-token";
-import { User, UserTestFactory } from "../../user/domain/user";
+import { UnregisteredUserTestFactory } from "../../user/domain/entity/unregistered-user";
+import { AccessToken } from "../../user/domain/entity/access-token";
+import { User, UserTestFactory } from "../../user/domain/entity/user";
 import { Message, MessageTestFactory } from "../domain/entity/message";
 import { MessageOwnerTestFactory } from "../domain/entity/message-owner";
 import {

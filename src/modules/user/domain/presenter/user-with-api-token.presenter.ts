@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { IPresenter, Presented } from "../../../../shared/presenter";
-import { UserWithAPIToken } from "../user-with-api-token";
+import { UserWithAPIToken } from "../entity/user-with-api-token";
 import { UserPresenter } from "./user.presenter";
 
 type Input = UserWithAPIToken;

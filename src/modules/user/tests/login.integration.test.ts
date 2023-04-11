@@ -3,7 +3,7 @@ import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
 } from "../domain/ports/auth-repository.interface";
-import { UnregisteredUser } from "../domain/unregistered-user";
+import { UnregisteredUser } from "../domain/entity/unregistered-user";
 import { App } from "../../../app";
 
 let app: App;

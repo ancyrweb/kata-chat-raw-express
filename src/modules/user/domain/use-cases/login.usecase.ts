@@ -1,26 +1,26 @@
 import { inject, injectable } from "inversify";
 import { addMonths } from "date-fns";
 
-import { AbstractUseCase } from "../../../shared/use-case";
+import { AbstractUseCase } from "../../../../shared/use-case";
 import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
-} from "./ports/auth-repository.interface";
-import { APIToken } from "./api-token";
+} from "../ports/auth-repository.interface";
+import { APIToken } from "../entity/api-token";
 import {
   IDateProvider,
   I_DATE_PROVIDER,
-} from "../../core/domain/ports/date-provider.interface";
+} from "../../../core/domain/ports/date-provider.interface";
 import {
   IIDProvider,
   I_ID_PROVIDER,
-} from "../../core/domain/ports/id-provider.interface";
-import { Result, ResultUtils } from "../../../shared/result";
-import { UserWithAPIToken } from "./user-with-api-token";
+} from "../../../core/domain/ports/id-provider.interface";
+import { Result, ResultUtils } from "../../../../shared/result";
+import { UserWithAPIToken } from "../entity/user-with-api-token";
 import {
   IRandomProvider,
   I_RANDOM_PROVIDER,
-} from "../../core/domain/ports/random-provider.interface";
+} from "../../../core/domain/ports/random-provider.interface";
 
 type Input = {
   username: string;

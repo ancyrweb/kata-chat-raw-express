@@ -6,14 +6,14 @@ import {
 } from "inversify-express-utils";
 import { Request } from "express";
 
-import { RegisterUseCase } from "../domain/register.usecase";
+import { RegisterUseCase } from "../domain/use-cases/register.usecase";
 import { Presented } from "../../../shared/presenter";
 import { UserPresenter } from "../domain/presenter/user.presenter";
 import { ResultUtils } from "../../../shared/result";
-import { LoginUseCase } from "../domain/login.usecase";
+import { LoginUseCase } from "../domain/use-cases/login.usecase";
 import { UserWithAPITokenPresenter } from "../domain/presenter/user-with-api-token.presenter";
 import { AccessTokenPresenter } from "../domain/presenter/access-token.presenter";
-import { CreateAccessTokenUseCase } from "../domain/create-access-token.usecase";
+import { CreateAccessTokenUseCase } from "../domain/use-cases/create-access-token.usecase";
 
 @controller("/auth")
 export class AuthController implements interfaces.Controller {

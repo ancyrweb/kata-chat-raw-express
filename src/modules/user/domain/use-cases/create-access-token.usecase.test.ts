@@ -3,14 +3,14 @@ import {
   AccessTokenCreated,
   CreateAccessTokenUseCase,
 } from "./create-access-token.usecase";
-import { IAuthRepository } from "./ports/auth-repository.interface";
-import { APIToken, TokenExpiredException } from "./api-token";
-import { AccessToken } from "./access-token";
-import { IDateProvider } from "../../core/domain/ports/date-provider.interface";
-import { ResultUtils } from "../../../shared/result";
-import { IEventDispatcher } from "../../core/domain/ports/event-dispatcher.interface";
-import { NotFoundException } from "../../../shared/errors";
-import { User, UserTestFactory } from "./user";
+import { IAuthRepository } from "../ports/auth-repository.interface";
+import { APIToken, TokenExpiredException } from "../entity/api-token";
+import { AccessToken } from "../entity/access-token";
+import { IDateProvider } from "../../../core/domain/ports/date-provider.interface";
+import { ResultUtils } from "../../../../shared/result";
+import { IEventDispatcher } from "../../../core/domain/ports/event-dispatcher.interface";
+import { NotFoundException } from "../../../../shared/errors";
+import { User, UserTestFactory } from "../entity/user";
 
 describe("Feature: creating an access token", () => {
   describe("Case: I have a valid API token", () => {

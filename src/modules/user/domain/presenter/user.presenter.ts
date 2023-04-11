@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { IPresenter } from "../../../../shared/presenter";
-import { User } from "../user";
+import { User } from "../entity/user";
 
 type Input = User;
 type Output = {

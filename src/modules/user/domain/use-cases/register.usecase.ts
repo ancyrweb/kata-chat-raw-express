@@ -1,22 +1,22 @@
 import { inject, injectable } from "inversify";
-import { Result, ResultUtils } from "../../../shared/result";
-import { AbstractUseCase } from "../../../shared/use-case";
-import { UnregisteredUser } from "./unregistered-user";
+import { Result, ResultUtils } from "../../../../shared/result";
+import { AbstractUseCase } from "../../../../shared/use-case";
+import { UnregisteredUser } from "../entity/unregistered-user";
 import {
   IDateProvider,
   I_DATE_PROVIDER,
-} from "../../core/domain/ports/date-provider.interface";
+} from "../../../core/domain/ports/date-provider.interface";
 import {
   IIDProvider,
   I_ID_PROVIDER,
-} from "../../core/domain/ports/id-provider.interface";
-import { Username } from "./value-object/username.value-object";
-import { PlainPassword } from "./value-object/plain-password.value-object";
+} from "../../../core/domain/ports/id-provider.interface";
+import { Username } from "../value-object/username.value-object";
+import { PlainPassword } from "../value-object/plain-password.value-object";
 import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
-} from "./ports/auth-repository.interface";
-import { User } from "./user";
+} from "../ports/auth-repository.interface";
+import { User } from "../entity/user";
 
 type Input = {
   username: string;

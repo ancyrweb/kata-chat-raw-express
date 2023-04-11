@@ -5,7 +5,7 @@ import { IDateProvider } from "../../../core/domain/ports/date-provider.interfac
 import { IIDProvider } from "../../../core/domain/ports/id-provider.interface";
 import { RoomOwner } from "../entity/room-owner";
 import { ResultUtils } from "../../../../shared/result";
-import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
+import { AuthenticatedUser } from "../../../user/domain/entity/authenticated-user";
 import { IEventDispatcher } from "../../../core/domain/ports/event-dispatcher.interface";
 
 describe("Feature: creating a room", () => {

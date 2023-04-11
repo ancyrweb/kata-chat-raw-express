@@ -2,7 +2,7 @@ import { mock } from "jest-mock-extended";
 import { IDateProvider } from "../../../core/domain/ports/date-provider.interface";
 import { RenameRoomUseCase, RoomRenamedEvent } from "./rename-room.usecase";
 import { IRoomRepository } from "../ports/room.repository-interface";
-import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
+import { AuthenticatedUser } from "../../../user/domain/entity/authenticated-user";
 import { Room } from "../entity/room";
 import { RoomOwner } from "../entity/room-owner";
 import { ResultUtils } from "../../../../shared/result";

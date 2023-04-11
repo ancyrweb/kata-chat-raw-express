@@ -1,6 +1,6 @@
 import { inject } from "inversify";
 import { AbstractUseCase } from "../../../../shared/use-case";
-import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
+import { AuthenticatedUser } from "../../../user/domain/entity/authenticated-user";
 import { MessageList } from "../entity/message-list";
 import {
   IRoomRepository,

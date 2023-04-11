@@ -15,7 +15,7 @@ import {
 import { Result, ResultUtils } from "../../../../shared/result";
 import { AbstractUseCase } from "../../../../shared/use-case";
 import { NotFoundException } from "../../../../shared/errors";
-import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
+import { AuthenticatedUser } from "../../../user/domain/entity/authenticated-user";
 import {
   AppEvent,
   IEventDispatcher,

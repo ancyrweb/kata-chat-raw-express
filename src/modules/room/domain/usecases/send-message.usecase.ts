@@ -9,7 +9,7 @@ import {
   IIDProvider,
   I_ID_PROVIDER,
 } from "../../../core/domain/ports/id-provider.interface";
-import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
+import { AuthenticatedUser } from "../../../user/domain/entity/authenticated-user";
 import { Message } from "../entity/message";
 import {
   IRoomRepository,
