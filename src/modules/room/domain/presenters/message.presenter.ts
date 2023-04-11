@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { IPresenter } from "../../../../shared/presenter";
-import { Message } from "../message";
+import { Message } from "../entity/message";
 
 type Output = {
   id: string;

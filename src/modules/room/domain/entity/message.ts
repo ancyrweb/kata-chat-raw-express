@@ -1,4 +1,4 @@
-import { AbstractEntity } from "../../../shared/entity";
+import { AbstractEntity } from "../../../../shared/entity";
 import { MessageOwner, MessageOwnerTestFactory } from "./message-owner";
 
 type Data = {

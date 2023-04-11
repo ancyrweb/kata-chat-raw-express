@@ -1,26 +1,26 @@
 import { inject, injectable } from "inversify";
-import { Room } from "./room";
+import { Room } from "../entity/room";
 import {
   IIDProvider,
   I_ID_PROVIDER,
-} from "../../core/domain/ports/id-provider.interface";
+} from "../../../core/domain/ports/id-provider.interface";
 import {
   IDateProvider,
   I_DATE_PROVIDER,
-} from "../../core/domain/ports/date-provider.interface";
+} from "../../../core/domain/ports/date-provider.interface";
 import {
   IRoomRepository,
   I_ROOM_REPOSITORY,
-} from "./ports/room.repository-interface";
-import { Result, ResultUtils } from "../../../shared/result";
-import { AbstractUseCase } from "../../../shared/use-case";
-import { NotFoundException } from "../../../shared/errors";
-import { AuthenticatedUser } from "../../user/domain/authenticated-user";
+} from "../ports/room.repository-interface";
+import { Result, ResultUtils } from "../../../../shared/result";
+import { AbstractUseCase } from "../../../../shared/use-case";
+import { NotFoundException } from "../../../../shared/errors";
+import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
 import {
   AppEvent,
   IEventDispatcher,
   I_EVENT_DISPATCHER,
-} from "../../core/domain/ports/event-dispatcher.interface";
+} from "../../../core/domain/ports/event-dispatcher.interface";
 
 type Input = {
   name: string;

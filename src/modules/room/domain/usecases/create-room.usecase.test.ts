@@ -1,12 +1,12 @@
 import { mock } from "jest-mock-extended";
-import { IRoomRepository } from "./ports/room.repository-interface";
+import { IRoomRepository } from "../ports/room.repository-interface";
 import { CreateRoomUseCase, RoomCreatedEvent } from "./create-room.usecase";
-import { IDateProvider } from "../../core/domain/ports/date-provider.interface";
-import { IIDProvider } from "../../core/domain/ports/id-provider.interface";
-import { RoomOwner } from "./room-owner";
-import { ResultUtils } from "../../../shared/result";
-import { AuthenticatedUser } from "../../user/domain/authenticated-user";
-import { IEventDispatcher } from "../../core/domain/ports/event-dispatcher.interface";
+import { IDateProvider } from "../../../core/domain/ports/date-provider.interface";
+import { IIDProvider } from "../../../core/domain/ports/id-provider.interface";
+import { RoomOwner } from "../entity/room-owner";
+import { ResultUtils } from "../../../../shared/result";
+import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
+import { IEventDispatcher } from "../../../core/domain/ports/event-dispatcher.interface";
 
 describe("Feature: creating a room", () => {
   describe("Case: creating a room", () => {

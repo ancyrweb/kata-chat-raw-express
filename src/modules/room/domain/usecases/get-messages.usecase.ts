@@ -1,12 +1,12 @@
 import { inject } from "inversify";
-import { AbstractUseCase } from "../../../shared/use-case";
-import { AuthenticatedUser } from "../../user/domain/authenticated-user";
-import { MessageList } from "./message-list";
+import { AbstractUseCase } from "../../../../shared/use-case";
+import { AuthenticatedUser } from "../../../user/domain/authenticated-user";
+import { MessageList } from "../entity/message-list";
 import {
   IRoomRepository,
   I_ROOM_REPOSITORY,
-} from "./ports/room.repository-interface";
-import { Result, ResultUtils } from "../../../shared/result";
+} from "../ports/room.repository-interface";
+import { Result, ResultUtils } from "../../../../shared/result";
 
 type Input = {
   roomId: string;

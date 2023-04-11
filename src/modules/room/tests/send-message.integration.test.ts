@@ -8,8 +8,8 @@ import {
   IRoomRepository,
   I_ROOM_REPOSITORY,
 } from "../domain/ports/room.repository-interface";
-import { Room } from "../domain/room";
-import { RoomOwner } from "../domain/room-owner";
+import { Room } from "../domain/entity/room";
+import { RoomOwner } from "../domain/entity/room-owner";
 
 describe("Feature: sending a message", () => {
   describe("Case: the message is valid", () => {

@@ -2,16 +2,16 @@ import { inject, injectable } from "inversify";
 
 import { FSDB, FSDBNotFoundException } from "../../../../shared/fsdb";
 import { IRoomRepository } from "../../domain/ports/room.repository-interface";
-import { RoomOwner } from "../../domain/room-owner";
+import { RoomOwner } from "../../domain/entity/room-owner";
 import { IConfig, I_CONFIG } from "../../../core/domain/ports/config.interface";
-import { Room } from "../../domain/room";
-import { Message } from "../../domain/message";
-import { MessageOwner } from "../../domain/message-owner";
+import { Room } from "../../domain/entity/room";
+import { Message } from "../../domain/entity/message";
+import { MessageOwner } from "../../domain/entity/message-owner";
 import {
   IAuthRepository,
   I_AUTH_REPOSITORY,
 } from "../../../user/domain/ports/auth-repository.interface";
-import { MessageList } from "../../domain/message-list";
+import { MessageList } from "../../domain/entity/message-list";
 
 @injectable()
 export class FSRoomRepository implements IRoomRepository {

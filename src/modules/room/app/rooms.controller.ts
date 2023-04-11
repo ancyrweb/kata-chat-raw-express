@@ -14,15 +14,15 @@ import { inject } from "inversify";
 import { mustBeAuthenticated } from "../../user/infra/must-be-authenticated.decorator";
 import { BaseController } from "../../../framework/base-controller";
 import { statusCode } from "../../core/infra/status-code.decorator";
-import { CreateRoomUseCase } from "../domain/create-room.usecase";
+import { CreateRoomUseCase } from "../domain/usecases/create-room.usecase";
 import { RoomPresenter } from "../domain/presenters/room.presenter";
 import { ResultUtils } from "../../../shared/result";
 import { Presented } from "../../../shared/presenter";
-import { RenameRoomUseCase } from "../domain/rename-room.usecase";
+import { RenameRoomUseCase } from "../domain/usecases/rename-room.usecase";
 import { MessagePresenter } from "../domain/presenters/message.presenter";
-import { SendMessageUseCase } from "../domain/send-message.usecase";
+import { SendMessageUseCase } from "../domain/usecases/send-message.usecase";
 import { MessageListPresenter } from "../domain/presenters/message-list.presenter";
-import { GetMessagesUseCase } from "../domain/get-messages.uesecase";
+import { GetMessagesUseCase } from "../domain/usecases/get-messages.usecase";
 
 @controller("/rooms")
 export class RoomsController extends BaseController {

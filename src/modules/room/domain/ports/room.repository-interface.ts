@@ -1,7 +1,7 @@
-import { Message } from "../message";
-import { MessageList } from "../message-list";
-import { Room } from "../room";
-import { RoomOwner } from "../room-owner";
+import { Message } from "../entity/message";
+import { MessageList } from "../entity/message-list";
+import { Room } from "../entity/room";
+import { RoomOwner } from "../entity/room-owner";
 
 export const I_ROOM_REPOSITORY = Symbol("IRoomRepository");
 

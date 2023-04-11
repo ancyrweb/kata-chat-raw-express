@@ -8,14 +8,14 @@ import { AuthIntegration } from "../../user/tests-utils/auth-integration";
 import { UnregisteredUserTestFactory } from "../../user/domain/unregistered-user";
 import { AccessToken } from "../../user/domain/access-token";
 import { User, UserTestFactory } from "../../user/domain/user";
-import { Message, MessageTestFactory } from "../domain/message";
-import { MessageOwnerTestFactory } from "../domain/message-owner";
+import { Message, MessageTestFactory } from "../domain/entity/message";
+import { MessageOwnerTestFactory } from "../domain/entity/message-owner";
 import {
   IRoomRepository,
   I_ROOM_REPOSITORY,
 } from "../domain/ports/room.repository-interface";
-import { Room, RoomTestFactory } from "../domain/room";
-import { RoomOwnerTestFactory } from "../domain/room-owner";
+import { Room, RoomTestFactory } from "../domain/entity/room";
+import { RoomOwnerTestFactory } from "../domain/entity/room-owner";
 describe("Feature: getting messages", () => {
   describe("Case: there are no messages in the room", () => {
     let fixture: Fixture;

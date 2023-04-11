@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { IPresenter } from "./../../../../shared/presenter";
-import { MessageList } from "../message-list";
+import { MessageList } from "../entity/message-list";
 
 type Input = MessageList;
 type Output = {

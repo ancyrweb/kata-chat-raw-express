@@ -1,5 +1,5 @@
-import { AbstractEntity } from "../../../shared/entity";
-import { DomainException } from "../../../shared/errors";
+import { AbstractEntity } from "../../../../shared/entity";
+import { DomainException } from "../../../../shared/errors";
 
 type RoomOwnerData = {
   id: string;

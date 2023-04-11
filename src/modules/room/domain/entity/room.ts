@@ -1,4 +1,4 @@
-import { AbstractEntity } from "../../../shared/entity";
+import { AbstractEntity } from "../../../../shared/entity";
 import { RoomOwner, RoomOwnerTestFactory } from "./room-owner";
 
 type RoomData = {
