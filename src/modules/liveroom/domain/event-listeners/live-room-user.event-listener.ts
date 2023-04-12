@@ -17,7 +17,7 @@ import {
 export class LiveRoomUserEventListener {
   constructor(
     @inject(I_EVENT_DISPATCHER)
-    private readonly eventDispatcher: IEventDispatcher,
+    eventDispatcher: IEventDispatcher,
     @inject(I_DATE_PROVIDER) private readonly dateProvider: IDateProvider,
     @inject(I_LIVE_ROOM_REPOSITORY)
     private readonly liveRoomRepository: ILiveRoomRepository
