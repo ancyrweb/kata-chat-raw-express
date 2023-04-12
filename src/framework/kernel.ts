@@ -1,9 +1,9 @@
-import { I_INFRA_AUTH_PROVIDER } from "./../modules/user/infra/auth-provider";
 import { Container } from "inversify";
 import express from "express";
 import expressWinston from "express-winston";
+import * as http from "http";
 
-import { InversifyExpressServer, interfaces } from "inversify-express-utils";
+import { InversifyExpressServer } from "inversify-express-utils";
 import { SystemLogger } from "../modules/core/infra/adapters/system.logger";
 import { AppException } from "../shared/errors";
 import {
@@ -12,9 +12,12 @@ import {
 } from "../modules/core/domain/ports/logger.interface";
 import { AuthProvider } from "../modules/user/infra/auth-provider";
 
+export const I_HTTP_SERVER = Symbol("I_HTTP_SERVER");
+
 export abstract class BaseKernel {
   protected container: Container;
   protected http!: express.Application;
+  protected server!: http.Server;
 
   constructor() {
     this.container = new Container();
@@ -47,10 +50,12 @@ export abstract class BaseKernel {
         app.use(errorHandler);
       })
       .build();
+
+    this.server = http.createServer(this.http);
   }
 
   async start() {
-    this.http.listen(3000, () => {
+    this.listen(3000, () => {
       const logger = this.container.get<ILogger>(I_LOGGER);
       logger.info("Server started on port 3000");
     });
@@ -60,8 +65,24 @@ export abstract class BaseKernel {
     return this.container;
   }
 
+  listen(callback: () => void): void;
+  listen(port: number, callback: () => void): void;
+  listen(port: any, callback?: () => void): void {
+    if (!callback) {
+      this.server = this.http.listen(port);
+    } else {
+      this.server = this.http.listen(port, callback);
+    }
+
+    this.container.bind(I_HTTP_SERVER).toConstantValue(this.server);
+  }
+
   getHttp() {
     return this.http;
+  }
+
+  getServer() {
+    return this.server;
   }
 }
 
