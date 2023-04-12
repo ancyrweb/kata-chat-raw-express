@@ -5,7 +5,7 @@ import { AuthenticatedUser } from "../../../user/domain/entity/authenticated-use
 import { Room } from "../entity/room";
 import { RoomOwner } from "../entity/room-owner";
 import { IEventDispatcher } from "../../../core/domain/ports/event-dispatcher.interface";
-import { MessageSent, SendMessageUseCase } from "./send-message.usecase";
+import { MessageSentEvent, SendMessageUseCase } from "./send-message.usecase";
 import { IIDProvider } from "../../../core/domain/ports/id-provider.interface";
 import { ResultUtils } from "../../../../shared/result";
 describe("Feature: sending a message", () => {
@@ -78,7 +78,7 @@ describe("Feature: sending a message", () => {
 
       expect(eventDispatcher.raise).toHaveBeenCalledTimes(1);
 
-      const event: MessageSent = eventDispatcher.raise.mock.calls[0][0];
+      const event: MessageSentEvent = eventDispatcher.raise.mock.calls[0][0];
       expect(event.props.roomId).toEqual("1");
       expect(event.props.messageId).toEqual("1");
     });

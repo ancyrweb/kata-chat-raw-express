@@ -62,14 +62,21 @@ export class SendMessageUseCase extends AbstractUseCase<Input, Output> {
     await this.roomRepository.createMessage(message);
 
     this.eventDispatcher.raise(
-      new MessageSent({ roomId: data.roomId, messageId: message.id })
+      new MessageSentEvent({
+        roomId: data.roomId,
+        userId: data.requester.userId,
+        messageId: message.id,
+        date: message.createdAt,
+      })
     );
 
     return ResultUtils.ok(message);
   }
 }
 
-export class MessageSent extends AppEvent<{
+export class MessageSentEvent extends AppEvent<{
   roomId: string;
+  userId: string;
   messageId: string;
+  date: Date;
 }>(Symbol("MessageSentEvent")) {}
