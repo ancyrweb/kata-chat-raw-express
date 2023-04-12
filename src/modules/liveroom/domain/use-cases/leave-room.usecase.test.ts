@@ -1,5 +1,5 @@
 import { mock } from "jest-mock-extended";
-import { ILiveRoomRepository } from "../adapters/live-room.repository-interface";
+import { ILiveRoomRepository } from "../ports/live-room.repository-interface";
 import { AuthenticatedUser } from "../../../user/domain/entity/authenticated-user";
 import { IRoomRepository } from "../../../room/domain/ports/room.repository-interface";
 import { RoomTestFactory } from "../../../room/domain/entity/room";

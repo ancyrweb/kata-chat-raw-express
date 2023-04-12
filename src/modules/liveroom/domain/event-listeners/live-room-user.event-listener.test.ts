@@ -2,7 +2,7 @@ import { mock } from "jest-mock-extended";
 import { subHours } from "date-fns";
 
 import { FakeDateProvider } from "../../../core/infra/adapters/fake.date-provider";
-import { ILiveRoomRepository } from "../adapters/live-room.repository-interface";
+import { ILiveRoomRepository } from "../ports/live-room.repository-interface";
 import { LiveRoomUserEventListener } from "./live-room-user.event-listener";
 import { SystemEventDispatcher } from "../../../core/infra/adapters/system.event-dispatcher";
 import { MessageSentEvent } from "../../../room/domain/usecases/send-message.usecase";

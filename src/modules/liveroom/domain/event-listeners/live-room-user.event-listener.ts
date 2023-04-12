@@ -11,7 +11,7 @@ import {
 import {
   ILiveRoomRepository,
   I_LIVE_ROOM_REPOSITORY,
-} from "../adapters/live-room.repository-interface";
+} from "../ports/live-room.repository-interface";
 
 @injectable()
 export class LiveRoomUserEventListener {
@@ -35,9 +35,9 @@ export class LiveRoomUserEventListener {
     );
 
     // The user didn't join the room
-    // TODO : have the user join the room when it happens
-    // TODO : have the user leave the room if it didn't have any activity for a while
     if (!liveRoom) {
+      // TODO : have the user join the room when it happens
+      // TODO : have the user leave the room if it didn't have any activity for a while
       return;
     }
 

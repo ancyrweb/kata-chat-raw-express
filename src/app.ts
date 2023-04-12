@@ -37,6 +37,11 @@ import "./modules/user/app/auth.controller";
 import "./modules/room/app/rooms.controller";
 import { MessageListPresenter } from "./modules/room/domain/presenters/message-list.presenter";
 import { GetMessagesUseCase } from "./modules/room/domain/usecases/get-messages.usecase";
+import { JoinRoomUseCase } from "./modules/liveroom/domain/use-cases/join-room.usecase";
+import { LeaveRoomUseCase } from "./modules/liveroom/domain/use-cases/leave-room.usecase";
+import { I_LIVE_ROOM_REPOSITORY } from "./modules/liveroom/domain/ports/live-room.repository-interface";
+import { InMemoryLiveRoomRepository } from "./modules/liveroom/infra/adapters/in-memory.live-room-repository";
+import { LiveRoomUserEventListener } from "./modules/liveroom/domain/event-listeners/live-room-user.event-listener";
 
 export class App extends BaseKernel {
   public inject(container: Container): void {
@@ -75,6 +80,15 @@ export class App extends BaseKernel {
     container.bind(RoomPresenter).toSelf().inSingletonScope();
     container.bind(MessagePresenter).toSelf().inSingletonScope();
     container.bind(MessageListPresenter).toSelf().inSingletonScope();
+    container.bind(JoinRoomUseCase).toSelf().inSingletonScope();
+    container.bind(LeaveRoomUseCase).toSelf().inSingletonScope();
+
+    container.bind(LiveRoomUserEventListener).toSelf().inSingletonScope();
+
     container.bind(I_ROOM_REPOSITORY).to(FSRoomRepository).inSingletonScope();
+    container
+      .bind(I_LIVE_ROOM_REPOSITORY)
+      .to(InMemoryLiveRoomRepository)
+      .inSingletonScope();
   }
 }

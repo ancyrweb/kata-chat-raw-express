@@ -8,6 +8,15 @@ type Data = {
 };
 
 export class LiveRoomUser extends AbstractEntity<Data> {
+  static create(roomId: string, userId: string, date: Date) {
+    return new LiveRoomUser({
+      id: `${roomId}-${userId}`,
+      roomId,
+      userId,
+      lastActionAt: date,
+    });
+  }
+
   get id() {
     return this.state.id;
   }

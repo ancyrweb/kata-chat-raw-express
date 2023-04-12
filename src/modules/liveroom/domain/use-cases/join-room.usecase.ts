@@ -6,7 +6,7 @@ import { Result, ResultUtils } from "../../../../shared/result";
 import {
   ILiveRoomRepository,
   I_LIVE_ROOM_REPOSITORY,
-} from "../adapters/live-room.repository-interface";
+} from "../ports/live-room.repository-interface";
 import {
   IRoomRepository,
   I_ROOM_REPOSITORY,
