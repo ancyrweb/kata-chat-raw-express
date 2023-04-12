@@ -1,32 +1,45 @@
-import { Room } from "../../../room/domain/entity/room";
-import { LiveRoomUser } from "../entity/live-room-user";
-
 export const I_LIVE_ROOM_REPOSITORY = Symbol("ILiveRoomRepository");
 
 export interface ILiveRoomRepository {
   /**
-   * Make the user join a room and creates a LiveRoomUser
+   * Make the user join a room
    * @param room
    * @param userId
    */
-  joinRoom(room: Room, userId: string): Promise<void>;
+  join(roomId: string, userId: string): Promise<void>;
   /**
-   * Make the user leave a room and destroys the LiveRoomUser
+   * Make the user leave a room
    * @param room
    * @param userId
    */
-  leaveRoom(room: Room, userId: string): Promise<void>;
+  leave(roomId: string, userId: string): Promise<void>;
 
   /**
-   * Find a LiveRoomUser by roomId and userId
-   * @param roomId
-   * @param userId
-   */
-  findLiveRoomUser(roomId: string, userId: string): Promise<LiveRoomUser>;
-
-  /**
-   * Save a LiveRoomUser
+   * Refresh the user status within all the rooms
    * @param liveRoomUser
    */
-  update(liveRoomUser: LiveRoomUser): Promise<void>;
+  refresh(userId: string): Promise<void>;
+
+  /**
+   * Leave all the rooms
+   * @param userId
+   */
+  leaveAll(userId: string): Promise<void>;
+
+  /**
+   * Get all the users in a room
+   * @param roomId
+   */
+  getUsers(roomId: string): Promise<LiveRoomUser[]>;
+}
+
+export type LiveRoomUser = {
+  userId: string;
+  status: Status;
+};
+
+export enum Status {
+  ONLINE = "ONLINE",
+  IDLE = "IDLE",
+  OFFLINE = "OFFLINE",
 }

@@ -50,7 +50,11 @@ describe("Feature: joining a room", () => {
       expect(roomRepository.findById).toHaveBeenCalledTimes(1);
       expect(roomRepository.findById).toHaveBeenCalledWith(input.roomId);
 
-      expect(liveRoomRepository.joinRoom).toHaveBeenCalledTimes(1);
+      expect(liveRoomRepository.join).toHaveBeenCalledTimes(1);
+      expect(liveRoomRepository.join).toHaveBeenCalledWith(
+        input.requester.userId,
+        input.roomId
+      );
     });
 
     it("should raise an event", async () => {
@@ -106,7 +110,7 @@ describe("Feature: joining a room", () => {
       expect(roomRepository.findById).toHaveBeenCalledTimes(1);
       expect(roomRepository.findById).toHaveBeenCalledWith(input.roomId);
 
-      expect(liveRoomRepository.joinRoom).toHaveBeenCalledTimes(0);
+      expect(liveRoomRepository.join).toHaveBeenCalledTimes(0);
     });
 
     it("should not raise an event", async () => {

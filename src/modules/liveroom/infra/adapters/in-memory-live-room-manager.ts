@@ -1,20 +1,13 @@
-import { inject, injectable } from "inversify";
 import { ILiveRoomRepository } from "../../domain/ports/live-room.repository-interface";
-import {
-  IDateProvider,
-  I_DATE_PROVIDER,
-} from "../../../core/domain/ports/date-provider.interface";
+import { IDateProvider } from "../../../core/domain/ports/date-provider.interface";
 import { InMemoryLiveRoom } from "./in-memory-live-room";
 
-type RoomId = string;
-type UserId = string;
-
-@injectable()
-export class InMemoryLiveRoomRepository implements ILiveRoomRepository {
+export class InMemoryLiveRoomManager {
   private rooms: Map<string, InMemoryLiveRoom> = new Map();
 
   constructor(
-    @inject(I_DATE_PROVIDER) private readonly dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
+    private readonly repository: ILiveRoomRepository
   ) {}
 
   public async join(userId: string, roomId: string) {
@@ -35,20 +28,15 @@ export class InMemoryLiveRoomRepository implements ILiveRoomRepository {
     room.leave(userId);
   }
 
-  public async refresh(userId: string) {
-    this.rooms.forEach((room) => room.refresh(userId));
-  }
-
   public async leaveAll(userId: string) {
     this.rooms.forEach((room) => room.leave(userId));
   }
 
-  public async getUsers(roomId: string) {
-    const room = this.rooms.get(roomId);
-    if (!room) {
-      return [];
-    }
+  public async refresh(userId: string) {
+    this.rooms.forEach((room) => room.refresh(userId));
+  }
 
-    return room.getUsers();
+  public getRoom(roomId: string) {
+    return this.rooms.get(roomId);
   }
 }

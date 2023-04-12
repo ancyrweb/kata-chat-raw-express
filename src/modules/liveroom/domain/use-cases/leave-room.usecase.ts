@@ -46,7 +46,7 @@ export class LeaveRoomUseCase extends AbstractUseCase<Input, Output> {
       throw new NotFoundException("Room not found");
     }
 
-    await this.liveRoomRepository.leaveRoom(room, input.requester.userId);
+    await this.liveRoomRepository.leave(input.requester.userId, room.id);
 
     this.eventDispatcher.raise(
       new UserLeftRoomEvent({

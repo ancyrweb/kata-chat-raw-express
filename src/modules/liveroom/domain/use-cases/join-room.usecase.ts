@@ -47,7 +47,7 @@ export class JoinRoomUseCase extends AbstractUseCase<Input, Output> {
       throw new NotFoundException("Room not found");
     }
 
-    await this.liveRoomRepository.joinRoom(room, input.requester.userId);
+    await this.liveRoomRepository.join(input.requester.userId, room.id);
 
     this.eventDispatcher.raise(
       new UserJoinedRoomEvent({
