@@ -40,7 +40,7 @@ export abstract class BaseKernel {
     return;
   }
 
-  async setup() {
+  setup() {
     this.inject(this.container);
 
     this.http = new InversifyExpressServer(
@@ -73,9 +73,6 @@ export abstract class BaseKernel {
     this.listen(3000, () => {
       const logger = this.container.get<ILogger>(I_LOGGER);
       logger.info("Server started on port 3000");
-
-      // Lifecycle hooks
-      this.onApplicationStart();
     });
   }
 
@@ -86,10 +83,8 @@ export abstract class BaseKernel {
   listen(callback: () => void): void;
   listen(port: number, callback: () => void): void;
   listen(port: any, callback?: () => void): void {
-    callback = callback ?? port;
-
     if (!callback) {
-      this.server = this.http.listen(callback);
+      this.server = this.http.listen(port);
     } else {
       this.server = this.http.listen(port, callback);
     }
@@ -110,6 +105,9 @@ export abstract class BaseKernel {
       this.stopSignal = "SIGINT";
       this.stop();
     });
+
+    // Lifecycle hooks
+    this.onApplicationStart();
   }
 
   stop() {

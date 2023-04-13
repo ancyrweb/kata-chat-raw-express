@@ -25,8 +25,6 @@ export class LiveRoomSocketServer {
   ) {}
 
   start() {
-    console.log("yay starting !!!");
-
     this.logger.info("LiveRoom Socket Server starting up");
 
     this.server = new SocketServer(this.httpServer);

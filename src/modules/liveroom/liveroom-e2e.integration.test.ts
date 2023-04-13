@@ -23,8 +23,7 @@ describe("Feature: Live Room", () => {
 
     beforeEach(async () => {
       app = new App();
-      await app.setup();
-      await app.start();
+      app.setup();
 
       const roomRepository = app
         .getContainer()
@@ -50,9 +49,8 @@ describe("Feature: Live Room", () => {
     afterEach(async () => {
       return new Promise((resolve, reject) => {
         clientSocket.close();
-
         app.stop();
-        wait(200).then(() => {
+        wait(100).then(() => {
           resolve(null);
         });
       });
@@ -77,7 +75,7 @@ describe("Feature: Live Room", () => {
       ]);
     });
 
-    it.skip("should leave a room", async () => {
+    it("should leave a room", async () => {
       clientSocket.emit("authenticate", { userId: "123" });
       await wait(50);
       clientSocket.emit("join", { roomId: "room1" });
