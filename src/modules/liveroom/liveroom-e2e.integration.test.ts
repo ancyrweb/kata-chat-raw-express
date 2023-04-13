@@ -13,7 +13,6 @@ import {
   I_ROOM_REPOSITORY,
 } from "../room/domain/ports/room.repository-interface";
 import { RoomTestFactory } from "../room/domain/entity/room";
-import { LiveRoomSocketServer } from "./infra/live-room.socket-server";
 
 describe("Feature: Live Room", () => {
   describe("Scenario: joining to a room", () => {
@@ -39,7 +38,7 @@ describe("Feature: Live Room", () => {
         app.listen(() => {
           server = app.getServer();
           const address = server.address() as any;
-          clientSocket = io(`http://localhost:${address.port}`);
+          clientSocket = io(`http://localhost:${address.port}`, {});
 
           resolve(null);
         });
@@ -59,7 +58,7 @@ describe("Feature: Live Room", () => {
     it("should join a room", async () => {
       clientSocket.emit("authenticate", { userId: "123" });
       await wait(100);
-      clientSocket.emit("join", { roomId: "room1" });
+      clientSocket.emit("join room", { roomId: "room1" });
       await wait(100);
 
       const users = await app
@@ -76,18 +75,27 @@ describe("Feature: Live Room", () => {
     });
 
     it("should leave a room", async () => {
+      const repository = app
+        .getContainer()
+        .get<InMemoryLiveRoomRepository>(I_LIVE_ROOM_REPOSITORY);
+
       clientSocket.emit("authenticate", { userId: "123" });
       await wait(50);
-      clientSocket.emit("join", { roomId: "room1" });
-      await wait(50);
-      clientSocket.emit("leave", { roomId: "room1" });
+      clientSocket.emit("join room", { roomId: "room1" });
+      await wait(100);
+
+      const usersAfterJoin = await repository.getUsers("room1");
+      expect(usersAfterJoin).toEqual([
+        {
+          userId: "123",
+          status: Status.ONLINE,
+        },
+      ]);
+
+      clientSocket.emit("leave room", { roomId: "room1" });
       await wait(50);
 
-      const users = await app
-        .getContainer()
-        .get<InMemoryLiveRoomRepository>(I_LIVE_ROOM_REPOSITORY)
-        .getUsers("room1");
-
+      const users = await repository.getUsers("room1");
       expect(users).toEqual([]);
     });
   });

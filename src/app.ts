@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { Container } from "inversify";
+import { OrNull } from "./types";
 
 import { BaseKernel } from "./framework/kernel";
 import { CoreService } from "./modules/core/app/core.service";
@@ -41,13 +42,12 @@ import { I_LIVE_ROOM_REPOSITORY } from "./modules/liveroom/domain/ports/live-roo
 import { InMemoryLiveRoomRepository } from "./modules/liveroom/infra/adapters/in-memory.live-room-repository";
 import { LiveRoomUserEventListener } from "./modules/liveroom/domain/event-listeners/live-room-user.event-listener";
 import { LeaveAllRoomsUseCase } from "./modules/liveroom/domain/use-cases/leave-all-rooms.usecase";
-import { LiveRoomSocketServer } from "./modules/liveroom/infra/live-room.socket-server";
+import { SocketServer } from "./modules/core/infra/socket-server";
 
 // Controllers
 import "./modules/core/app/core.controller";
 import "./modules/user/app/auth.controller";
 import "./modules/room/app/rooms.controller";
-import { OrNull } from "./types";
 
 export class App extends BaseKernel {
   public inject(container: Container): void {
@@ -67,7 +67,7 @@ export class App extends BaseKernel {
     container.bind(I_AUTH_REPOSITORY).to(FSAuthRepository).inSingletonScope();
 
     container.bind(CoreService).toSelf().inSingletonScope();
-    container.bind(LiveRoomSocketServer).toSelf().inSingletonScope();
+    container.bind(SocketServer).toSelf().inSingletonScope();
 
     // Auth
     container.bind(RegisterUseCase).toSelf().inSingletonScope();
@@ -101,8 +101,8 @@ export class App extends BaseKernel {
   }
 
   async onApplicationStart() {
-    const liveRoomSocketServer = this.getLiveRoomSocketServer();
-    await liveRoomSocketServer.start();
+    const socketServer = this.getSocketServer();
+    await socketServer.start();
   }
 
   protected async onApplicationShutdown(signal: OrNull<string>): Promise<void> {
@@ -110,8 +110,8 @@ export class App extends BaseKernel {
     logger.info("Shutting down", { signal });
   }
 
-  getLiveRoomSocketServer() {
-    return this.container.get(LiveRoomSocketServer);
+  getSocketServer() {
+    return this.container.get(SocketServer);
   }
 
   getLogger() {
